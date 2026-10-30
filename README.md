@@ -34,6 +34,19 @@
 
 **핵심 경험:** 초기 반복 출력 문제, 서로 다른 Gloss 표기 체계, 데이터 누수와 평가 조건을 검토하며 **점수와 한계를 함께 설명하는 실험 습관**을 익혔습니다.
 
+### 03 · [증권사 텍스트 데이터 분석](projects/financial-text-analysis.md)
+
+**Text Mining · NLP · Exploratory Analysis**
+
+[분석 과정·결과·한계](projects/financial-text-analysis.md) · [Notion 포트폴리오](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)
+
+- 국내 5개 증권사의 **뉴스·회사 블로그·종목토론방**을 비교한 프로젝트입니다.
+- 원본 기록 기준 증권사별 뉴스 **1,000건**, 종목토론방 게시글 **1,560건 이상**을 수집하고 블로그 자료와 함께 분석했습니다.
+- **Selenium·네이버 API·Kiwi**를 활용한 수집·전처리와 워드클라우드·토픽·KNU 기반 감성분석을 정리했습니다.
+- 텍스트 감성, 추천·비추천, 시간대별 총반응량과 글당 평균을 구분했습니다. 회사별 수집 기간 차이와 재현 조건의 한계도 함께 제시합니다.
+
+**핵심 경험:** 분석 목적에 따라 전처리와 지표의 의미를 구분하고, 관찰 결과와 해석을 분리했습니다. 상세 문서는 원본 요약의 본문·표를 근거로 하며 원시 데이터·실행 코드를 재검증한 결과는 아닙니다.
+
 ## Additional Experience
 
 **LG Aimers · 야구 데이터 예측 모델 실험**
@@ -49,6 +62,7 @@
 | AI / NLP | PyTorch, Hugging Face Transformers, PEFT / LoRA, scikit-learn |
 | Software | React, REST API Integration, Git / GitHub |
 | Analysis & Experiments | pandas, NumPy, Jupyter Notebook, Google Colab |
+| Text Mining | Selenium, 네이버 API, Kiwi, KNU 기반 감성분석 |
 
 ## Links
 
