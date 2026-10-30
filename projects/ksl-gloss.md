@@ -1,15 +1,15 @@
 # Case Study 02 · 한국어 → 한국수어 Gloss 모델 파인튜닝
 
 **프로젝트:** X:AI 학회 팀 프로젝트 (2026.07–08)  
-**팀 저장소:** [adv-pj-a/llm](https://github.com/molba2see/adv-pj-a/tree/main/llm)
+**저장소:** [adv-pj-a/llm](https://github.com/molba2see/adv-pj-a/tree/main/llm)
 
 ## Problem
 
-한국어 문장을 **한국수어 Gloss 주석 시퀀스**로 변환하는 seq2seq 모델을 실험했습니다. Gloss는 수어 영상이나 비수지·공간 문법 전체를 표현하는 완성형 번역 결과물이 아닙니다.
+한국어 문장을 paust/pko-t5-base 모델을 이용해 **한국수어 Gloss 주석 시퀀스**로 변환하는 모델을 실험했습니다. Gloss는 수어 영상이나 비수지·공간 문법 전체를 표현하는 완성형 번역 결과물이 아닙니다.
 
 ## Data Pipeline
 
-국립국어원 2024/2025 자료, 재난안전 수어자료, GKSL3k를 활용했습니다.
+모두의 말뭉치, GKLS 등에서 수집한 국립국어원 한국수어-한국어 병렬 말뭉치 2024/2025 자료, 재난안전 수어자료, GKSL3k를 활용했습니다.
 
 | 구분 | 원본 행 | 중복 제거 후 |
 | --- | ---: | ---: |
