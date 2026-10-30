@@ -47,6 +47,15 @@
 
 **핵심 경험:** 분석 목적에 따라 전처리와 지표의 의미를 구분하고, 관찰 결과와 해석을 분리했습니다. 상세 문서는 원본 요약의 본문·표를 근거로 하며 원시 데이터·실행 코드를 재검증한 결과는 아닙니다.
 
+## Other GitHub Projects
+
+- [visionAI](https://github.com/hoyhoy1227/visionAI) · 이미지 세그멘테이션, OCR, 객체 탐지 실험
+- [haninvest](https://github.com/hoyhoy1227/haninvest) · 한국투자 AI리그 분석 및 자동화 기록
+- [little-big-fraude](https://github.com/hoyhoy1227/little-big-fraude) · 온라인 사기 체험 모바일 스릴러
+- [seolhwa-survivor](https://github.com/hoyhoy1227/seolhwa-survivor) · 한국 설화 기반 브라우저 생존 액션 게임
+- [-2](https://github.com/hoyhoy1227/-2) · MLP 모델 실험
+- [hoyoung-kookmin](https://github.com/hoyhoy1227/hoyoung-kookmin) · 국민대학교 관련 작업 저장소
+
 ## Additional Experience
 
 **LG Aimers · 야구 데이터 예측 모델 실험**
