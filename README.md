@@ -48,7 +48,7 @@
 
 | 분야 | 도구 및 기술 |
 | --- | --- |
-| Programming | Python, SQL, JavaScript / TypeScript |
+| Programming | Python, Java, SQL, JavaScript / TypeScript |
 | AI / NLP | PyTorch, Hugging Face Transformers, PEFT / LoRA, scikit-learn |
 | Software | React, REST API Integration, Git / GitHub |
 | Analysis & Experiments | pandas, NumPy, Jupyter Notebook, Google Colab |
