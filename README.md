@@ -1,23 +1,28 @@
 # 이호영 | AI & Software Developer
 
-**AI 모델의 가능성을 실험하고, 실제로 동작하는 소프트웨어로 연결합니다.**
+**AI 모델을 실험하고, 동작하는 소프트웨어로 연결합니다.**
 
 국민대학교 AI빅데이터융합경영학과 / 데이터사이언스융합전공에서 AI·데이터를 공부하고 있습니다. 생성형 AI의 서비스 통합, 자연어 처리 모델 파인튜닝, 실험 결과에 근거한 문제 해결에 관심이 있습니다.
+
+**Contact** · [hoyhoy1227@gmail.com](mailto:hoyhoy1227@gmail.com)  
+**Portfolio** · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656) · [Figma · 본편 14장](https://www.figma.com/design/bIHsCT2RsHy4EvsFIcacor?node-id=3-2) · [GitHub](https://github.com/hoyhoy1227)  
+**Qualifications** · ADsP · SQLD · OPIc AL
 
 > **Problem → Approach → Implementation → Validation → Lessons Learned**
 
 ## Featured Projects
 
-### 01 · [사기방지위원회 — AI 기반 금융사기 예방 인터랙티브 게임](projects/whatfraud.md)
+### 01 · [사기방지위원회 — 금융사기 체험 웹 게임](projects/whatfraud.md)
 
 **Generative AI · Software Engineering · Interactive Game**
 
 [실행 데모](https://whatfraud.hoyhoy1227.chatgpt.site/) · [GitHub 코드](https://github.com/hoyhoy1227/whatfraud) · [기술 사례 읽기](projects/whatfraud.md)
 
-- 금융사기 상황을 게임에서 직접 경험하고 판단하도록 하는 **2인 개발 프로젝트**입니다.
+- 가상의 스마트폰에서 연락·기록을 비교하고 답장·보류·차단·가상 송금으로 대응하는 **2인 공동 개발 웹 게임**입니다. 보고서와 되감기로 다른 선택을 돌아봅니다.
 - **Gemini API**를 연결해 특정 장면에서 상황에 맞는 캐릭터 답변을 생성하도록 구성했습니다.
 - AI가 생성하는 대화와 별도로 게임 상태 엔진이 **사건·행동·가상 거래·결말**을 관리합니다.
-- 인물별 대화 맥락, 입력·응답 검증, 호출 제한, **내장 대사 fallback**으로 AI의 불확실성에 대응했습니다.
+- 인물별 대화 맥락, 입력·응답 검증, 게임 내 AI 사용 한도(사건별 2/2/1회·회차 최대 5회), 요청당 최대 1회 응답 교정, **내장 대사 fallback**을 적용했습니다. 5회는 외부 API 호출 수의 상한이 아닙니다.
+- 기획·구현 전반, 기능·스토리 구성과 **Suno 음악 작업**에 참여했습니다. 구현은 팀 공동 결과입니다.
 
 **핵심 경험:** LLM을 호출하는 기능보다, 모델이 실패해도 게임이 안정적으로 이어지는 **시스템 경계와 오류 처리**를 고민했습니다.
 
@@ -31,6 +36,8 @@
 - 수어 데이터 수집·전처리와 **pko-T5 기반 LoRA + `lm_head` 파인튜닝**에 참여했습니다.
 - 원본 27,569행에서 완전 중복을 제거한 **27,027쌍**의 데이터 처리 흐름을 정리했습니다.
 - GKSL의 142개 고유 입력 **다중 정답 평가에서 WER 0.4602**를 기록했습니다. 이 점수는 전체 데이터에 대한 평가가 아닙니다.
+
+- NIKL v4는 전체 test 2,557행 중 700행을 repeat-safe 조건으로 평가해 **WER 0.6413**을 기록했습니다. GKSL과 표본·방식이 달라 직접 성능을 비교하지 않습니다.
 
 **핵심 경험:** 초기 반복 출력 문제, 서로 다른 Gloss 표기 체계, 데이터 누수와 평가 조건을 검토하며 **점수와 한계를 함께 설명하는 실험 습관**을 익혔습니다.
 
@@ -47,22 +54,16 @@
 
 **핵심 경험:** 목적별 전처리와 지표를 설계하고 관찰과 해석을 구분했습니다. 의사라벨 분류 결과를 사람 정답 정확도로 제시하지 않고, TF-IDF를 분할 전에 적합한 평가 누수와 데이터 기간·중복 문제도 함께 기록했습니다. 팀 공동 결과이며 세부 개인 담당 범위는 원본에서 구분되지 않습니다.
 
-## Additional Experience
-
-**LG Aimers · 야구 데이터 예측 모델 실험**
-
-야구 경기의 득점권·후반 상황, 1·2군 기록 등의 도메인 특성을 반영할 수 있는 변수를 제안하고 모델 대안을 비교했습니다. 성능 개선이 확인되지 않은 대안은 채택하지 않았습니다. 실험 수치와 세부 개인 기여는 원본 로그를 확인한 후 보강할 예정입니다.
-
-
 ## Tech Stack
 
 | 분야 | 도구 및 기술 |
 | --- | --- |
 | Programming | Python, Java, SQL, JavaScript / TypeScript |
 | AI / NLP | PyTorch, Hugging Face Transformers, PEFT / LoRA, scikit-learn |
-| Software | React, REST API Integration, Git / GitHub |
+| Software | React, Next.js 호환 구조, Vinext / Vite, TypeScript, Gemini API, REST API, Git / GitHub |
 | Analysis & Experiments | pandas, NumPy, Jupyter Notebook, Google Colab |
 | Text Mining | Selenium, 네이버 API, Kiwi, soynlp, TF-IDF, scikit-learn LDA, pyLDAvis, KNU 기반 감성분석 |
+| Planning & Audio | 기능·스토리 구성, Suno |
 
 ## Links
 
