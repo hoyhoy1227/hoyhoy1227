@@ -1,0 +1,88 @@
+{
+  "run_date": "2026-11-01",
+  "source_commit": "a4289958c7c66724df7d25b6475aacc7328b1c46",
+  "provider_mode": "mocked; source test fixtures; no real Gemini call or generated quality measurement",
+  "examples": [
+    {
+      "name": "normal",
+      "input": "안내부터 확인해 보세요",
+      "scene": "peer",
+      "attachment": "none",
+      "http_status": 200,
+      "provider_calls": 1,
+      "output": {
+        "reply": "알려주셔서 고마워요. 안내부터 다시 볼게요.",
+        "reaction": "check",
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite"
+      }
+    },
+    {
+      "name": "one_repair",
+      "input": "여기 수상하네요 돈 보내지 맙시다",
+      "scene": "peer",
+      "attachment": "deleted-question",
+      "http_status": 200,
+      "provider_calls": 2,
+      "output": {
+        "reply": "추가 비용을 물었던 제 질문이네요. 저도 돈을 보내지 않고 조건부터 확인할게요.",
+        "reaction": "check",
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "supportMode": "compare",
+        "focus": "deleted-question"
+      }
+    },
+    {
+      "name": "policy_rejected_after_repair",
+      "input": "안내부터 확인해 보세요",
+      "scene": "peer",
+      "attachment": "none",
+      "http_status": 502,
+      "provider_calls": 2,
+      "output": {
+        "code": "unsafe_response",
+        "validation": "reply_policy"
+      }
+    },
+    {
+      "name": "identity_quality_fallback",
+      "input": "네 이름으로 새 계정에서 연락이 왔어. 이 기록 같이 확인해 줘.",
+      "scene": "friend",
+      "attachment": "account-profile",
+      "http_status": 200,
+      "provider_calls": 2,
+      "output": {
+        "reply": "내 이름이지만 그 새 계정은 내가 쓰는 게 아니야. 나한테 먼저 보여 줘서 다행이야.",
+        "reaction": "together",
+        "supportMode": "records",
+        "focus": "records",
+        "provider": "scripted",
+        "model": null,
+        "fallbackReason": "reply_quality"
+      }
+    },
+    {
+      "name": "provider_timeout",
+      "input": "안내부터 확인해 보세요",
+      "scene": "peer",
+      "attachment": "none",
+      "http_status": 504,
+      "provider_calls": 1,
+      "output": {
+        "code": "provider_timeout"
+      }
+    },
+    {
+      "name": "provider_quota",
+      "input": "안내부터 확인해 보세요",
+      "scene": "peer",
+      "attachment": "none",
+      "http_status": 429,
+      "provider_calls": 1,
+      "output": {
+        "code": "provider_quota"
+      }
+    }
+  ]
+}

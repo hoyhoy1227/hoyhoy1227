@@ -8,6 +8,8 @@
 **Portfolio** · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656) · [Figma · 본편 14장](https://www.figma.com/design/bIHsCT2RsHy4EvsFIcacor?node-id=3-2) · [GitHub](https://github.com/hoyhoy1227)  
 **Qualifications** · ADsP · SQLD · OPIc AL
 
+[실행·실패 사례와 재현 검증 · 2026-11-01](verification/2026-11-01/README.md) · 게임 11개 검사 명령 통과 · 수어 CPU 검사 45개 통과 / 1개 건너뜀
+
 > **Problem → Approach → Implementation → Validation → Lessons Learned**
 
 ## Featured Projects
@@ -38,7 +40,7 @@
 - GKSL의 142개 고유 입력 **다중 정답 평가에서 WER 0.4602**를 기록했습니다. 이 점수는 전체 데이터에 대한 평가가 아닙니다.
 
 - **NIKL 출처:** 국립국어원 모두의 말뭉치 **「한국수어-한국어 병렬 말뭉치」**입니다. 원본 데이터·원문 문장–Gloss 쌍은 비공개하며 처리 코드·절차·설정·집계만 공개합니다.
-- NIKL v4는 전체 test 2,557행 중 700행을 repeat-safe 조건으로 평가해 **WER 0.6413**을 기록했습니다. GKSL과 표본·방식이 달라 직접 성능을 비교하지 않습니다.
+- NIKL v4 경로는 번호형 혼합 test 2,557행 중 700행(국립국어원 2024 90행·2025 608행·재난안전 2행)을 repeat-safe 조건으로 평가해 **WER 0.6413**을 기록했습니다. 보존된 집계이며 GKSL과 직접 성능을 비교하지 않습니다.
 
 **핵심 경험:** 초기 반복 출력 문제, 서로 다른 Gloss 표기 체계, 데이터 누수와 평가 조건을 검토하며 **점수와 한계를 함께 설명하는 실험 습관**을 익혔습니다.
 

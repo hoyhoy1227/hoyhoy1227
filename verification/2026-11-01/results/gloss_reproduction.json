@@ -1,0 +1,136 @@
+{
+  "run_date": "2026-11-01",
+  "source_commit": "6a744e67e9ee061b6ba44b22d4888643d0b78065",
+  "scope": "CPU-only original processing/evaluation code; hand-authored format fixtures; no learned model inference",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "versions": {
+    "pytest": "8.4.2",
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "sacrebleu": "2.6.0"
+  },
+  "source_input_unchanged": true,
+  "prepare_report": {
+    "source_files_are_read_only": true,
+    "sources": [
+      {
+        "requested": "<review-workspace>\\synthetic_gloss\\source\\samples.csv",
+        "selected": "<review-workspace>\\synthetic_gloss\\source\\samples.csv",
+        "rows": 102
+      }
+    ],
+    "input_rows": 102,
+    "unique_rows": 101,
+    "exact_duplicates_removed": 1,
+    "generated_rows": 0,
+    "split_counts": {
+      "train": 83,
+      "valid": 10,
+      "test": 8
+    },
+    "split_group_intersections": {
+      "train_valid": 0,
+      "train_test": 0,
+      "valid_test": 0
+    },
+    "conflicting_text_groups": 1,
+    "label_type_counts": {
+      "hand_authored_fixture": 101
+    },
+    "corpus_counts": {
+      "source": 101
+    },
+    "gloss_convention_counts": {
+      "numbered": 100,
+      "unknown": 1
+    },
+    "seed": 42,
+    "valid_ratio": 0.1,
+    "test_ratio": 0.1
+  },
+  "rejected_output_inside_source": {
+    "exit_code": 1,
+    "error_tail": [
+      "ValueError: 원본 보호를 위해 --output은 입력 데이터 폴더 밖에 지정해야 합니다.",
+      "입력: <review-workspace>\\synthetic_gloss\\source",
+      "출력: <review-workspace>\\synthetic_gloss\\source\\must-not-write"
+    ],
+    "output_created": false
+  },
+  "metric_examples": [
+    {
+      "name": "exact",
+      "synthetic_prediction": "SYN_A SYN_B SYN_C",
+      "synthetic_reference": "SYN_A SYN_B SYN_C",
+      "metrics": {
+        "gloss_wer": 0.0,
+        "exact_match": 1.0,
+        "token_f1": 1.0,
+        "pred_len": 3.0,
+        "ref_len": 3.0,
+        "bleu": 0.0,
+        "chrf": 100.0
+      }
+    },
+    {
+      "name": "order_error",
+      "synthetic_prediction": "SYN_B SYN_A SYN_C",
+      "synthetic_reference": "SYN_A SYN_B SYN_C",
+      "metrics": {
+        "gloss_wer": 0.6667,
+        "exact_match": 0.0,
+        "token_f1": 1.0,
+        "pred_len": 3.0,
+        "ref_len": 3.0,
+        "bleu": 0.0,
+        "chrf": 96.6667
+      }
+    },
+    {
+      "name": "deletion",
+      "synthetic_prediction": "SYN_A SYN_C",
+      "synthetic_reference": "SYN_A SYN_B SYN_C",
+      "metrics": {
+        "gloss_wer": 0.3333,
+        "exact_match": 0.0,
+        "token_f1": 0.8,
+        "pred_len": 2.0,
+        "ref_len": 3.0,
+        "bleu": 0.0,
+        "chrf": 62.6287
+      }
+    },
+    {
+      "name": "empty",
+      "synthetic_prediction": "",
+      "synthetic_reference": "SYN_A SYN_B SYN_C",
+      "metrics": {
+        "gloss_wer": 1.0,
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "pred_len": 0.0,
+        "ref_len": 3.0,
+        "bleu": 0.0,
+        "chrf": 0.0
+      }
+    }
+  ],
+  "multi_reference": {
+    "references": [
+      "SYN_A SYN_B SYN_C",
+      "SYN_A SYN_C"
+    ],
+    "selected_reference": "SYN_A SYN_C",
+    "aggregate": {
+      "samples": 1,
+      "gloss_wer": 0.0,
+      "exact_match": 1.0,
+      "token_f1": 1.0,
+      "pred_len": 2.0,
+      "ref_len": 2.0
+    }
+  },
+  "actual_model_generated": false,
+  "original_corpus_rows_read": 0
+}

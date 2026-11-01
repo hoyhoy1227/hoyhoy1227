@@ -1,0 +1,93 @@
+{
+  "checked_at": "2026-11-01T22:08:21.527425+09:00",
+  "source_commit": "a4289958c7c66724df7d25b6475aacc7328b1c46",
+  "node": "v24.22.1",
+  "provider": "mocked; no Gemini network request",
+  "results": [
+    {
+      "command": "node tools/content/build-content.mjs --check",
+      "exit_code": 0,
+      "seconds": 0.274,
+      "stdout": "콘텐츠 검증 완료: 3개 사건\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/dialogue/evaluate-dialogue.mjs",
+      "exit_code": 0,
+      "seconds": 0.145,
+      "stdout": "대화 안전 평가 완료: 3개 사건 · 48개 후보 응답\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-story.mjs",
+      "exit_code": 0,
+      "seconds": 0.683,
+      "stdout": "Story tests passed: 80 path combinations, no forced loss, idempotency, verification/report gates, privacy, restore, rewind, contextual recovery.\nSeparate campaign/demo budget restore passed.\nNarrative choice tests passed: prerequisites, disclosure, exclusivity, restore and aftercare.\nDecision windows, chronological chat, quota restore and relationship memory passed.\nEvidence gates, retained deletion and profile metadata passed.\nScene-local closure, stale events, saved pages, legacy quota/ledger and prompt contracts covered.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-attachment-branches.mjs",
+      "exit_code": 0,
+      "seconds": 0.146,
+      "stdout": "Attachment branch regressions passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-decision-messages.mjs",
+      "exit_code": 0,
+      "seconds": 0.155,
+      "stdout": "Decision message guards passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-message-transcript.mjs",
+      "exit_code": 0,
+      "seconds": 0.203,
+      "stdout": "Message transcript ordering, legacy migration and conversation isolation passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-response-report.mjs",
+      "exit_code": 0,
+      "seconds": 0.216,
+      "stdout": "Response report: completion scope, demo, event order, loss, dialogue limits and saved-run parity passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-evidence-notes.mjs",
+      "exit_code": 0,
+      "seconds": 1.794,
+      "stdout": "Evidence notes: transaction states, restored records, attachment guards and readable detail markup passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-story-ui.mjs",
+      "exit_code": 0,
+      "stdout": "Story UI SSR tests passed: ledger, endings, pivot labels and controls. Browser/device QA is separate.\nOne-shot message SSR passed: input opt-in, prepared alternative, profile and story context.\nDeferred call and in-memory transcript SSR passed.\nContext SSR passed: entry, demo, resume, bridge skip, new-contact affordance.\nMessenger SSR passed: bounded character knowledge, unified header, inbox rows and consistent back navigation.\nMessenger consistency passed: sentence delivery, evidence gate, previews, private read receipts and stage-aware peer context.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-ai-chat.mjs",
+      "exit_code": 0,
+      "seconds": 4.251,
+      "stdout": "{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_story_context\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_messages\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_messages\"}\n{\"event\":\"ai_chat_result\",\"status\":409,\"outcome\":\"story_message_required\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"scripted\"}\n{\"event\":\"ai_chat_result\",\"status\":503,\"outcome\":\"ai_unconfigured\"}\n{\"event\":\"ai_chat_result\",\"status\":502,\"outcome\":\"unsafe_response\",\"validation\":\"reply_policy\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":502,\"outcome\":\"unsafe_response\",\"validation\":\"story_contract\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":502,\"outcome\":\"unsafe_response\",\"validation\":\"story_contract\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":502,\"outcome\":\"unsafe_response\",\"validation\":\"reply_policy\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"budget_exhausted\"}\n{\"event\":\"ai_chat_result\",\"status\":502,\"outcome\":\"provider_token_limit\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"provider_quota\"}\n{\"event\":\"ai_chat_result\",\"status\":503,\"outcome\":\"provider_cooldown\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"budget_exhausted\"}\n{\"event\":\"ai_chat_result\",\"status\":503,\"outcome\":\"budget_unavailable\"}\n{\"event\":\"ai_chat_result\",\"status\":504,\"outcome\":\"provider_timeout\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":403,\"outcome\":\"forbidden_origin\"}\n{\"event\":\"ai_chat_result\",\"status\":403,\"outcome\":\"forbidden_origin\"}\n{\"event\":\"ai_chat_result\",\"status\":403,\"outcome\":\"forbidden_origin\"}\n{\"event\":\"ai_chat_result\",\"status\":403,\"outcome\":\"forbidden_origin\"}\n{\"event\":\"ai_chat_result\",\"status\":415,\"outcome\":\"unsupported_media_type\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_request\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_messages\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_request\"}\n{\"event\":\"ai_chat_result\",\"status\":400,\"outcome\":\"invalid_messages\"}\n{\"event\":\"ai_chat_result\",\"status\":408,\"outcome\":\"body_timeout\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"rate_limit\"}\n{\"event\":\"ai_chat_result\",\"status\":503,\"outcome\":\"provider_busy\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":503,\"outcome\":\"ai_disabled\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"scripted\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\nSecurity request tests passed: origin, media type, body deadline, schema, forwarding, concurrency, kill switch, privacy.\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":502,\"outcome\":\"unsafe_response\",\"validation\":\"reply_policy\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":429,\"outcome\":\"moment_used\"}\n{\"event\":\"ai_chat_result\",\"status\":502,\"outcome\":\"unsafe_response\",\"validation\":\"story_contract\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"gemini\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"scripted\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"scripted\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"scripted\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"scripted\"}\n{\"event\":\"ai_chat_result\",\"status\":200,\"outcome\":\"scripted\"}\nOne-shot AI tests passed, including bounded validation repair and identity fallbacks.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node tools/tests/test-budget.mjs",
+      "exit_code": 0,
+      "seconds": 1.911,
+      "stdout": "Shared budget tests passed: atomic concurrent reserve, UTC day rollover, restart, missing/offline/stalled DB, bounded storage.\n",
+      "stderr": ""
+    }
+  ],
+  "passed": 11,
+  "total": 11,
+  "resolved_environment_failures": [
+    {
+      "command": "node tools/tests/test-story-ui.mjs",
+      "cause": "UI test reads tracked audio asset omitted from initial text-only copy; restored unchanged source asset then reran"
+    }
+  ],
+  "timing_note": "UI rerun elapsed time was not collected after restoring the original audio asset."
+}

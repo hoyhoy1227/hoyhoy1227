@@ -46,7 +46,18 @@ flowchart LR
 | 저장·되감기에서 거래가 중복 반영될 위험 | 의미 이벤트 재생과 거래 ID 검증, 본편/짧은 체험 저장 상태 분리 |
 | API 할당량·지연·품질 실패 | 입력 크기·게임 내 사용량·공유 예산 제한, 요청당 교정 생성 최대 1회, fallback |
 
-콘텐츠·대사, 게임 상태 복원, 송금 중복, 모의 응답/예산 처리를 확인하는 자동 검사 코드가 포함됩니다. 이 포트폴리오 통합 검토에서 검사를 재실행하거나 실제 Gemini 품질을 측정한 것은 아닙니다. **자동 검사는 실사용자의 학습 효과나 모든 실기기 품질을 입증하지 않습니다.**
+**2026-11-01 실행 확인:** 원본 커밋 `a428995`에서 콘텐츠·대사 검사 2개와 상태·화면·API·예산 검사 9개, **총 11개 명령이 통과**했습니다. 상태 경로 80가지와 내장 대사 후보 48개를 포함합니다. UI 검사는 서버 렌더링 기반이고 외부 Gemini는 모의 응답으로 대체했습니다. 실제 Gemini 품질·실브라우저/실기기·실사용 학습 효과를 측정한 결과는 아닙니다.
+
+| 원본 API 실행 사례 | 관찰한 결과 | 모의 provider 호출 |
+| --- | --- | ---: |
+| 정상 응답 | HTTP 200 · 답장 유지 | 1 |
+| 첨부 focus 오류 → 1회 교정 | HTTP 200 · 교정 응답 채택 | 2 |
+| 정책 위반 응답 지속 | HTTP 502 · `unsafe_response` | 2 |
+| 알려진 신원을 누락한 응답 | HTTP 200 · `scripted` / `reply_quality` fallback | 2 |
+| 시간 초과 | HTTP 504 · `provider_timeout` | 1 |
+| 할당량 초과 | HTTP 429 · `provider_quota` | 1 |
+
+이는 원본 테스트의 자체 작성 입력·고정 응답으로 실행한 결과입니다. [실행 환경·명령·전체 입출력과 로그](../verification/2026-11-01/README.md)를 함께 공개합니다.
 
 ## What I Learned
 
@@ -63,4 +74,4 @@ LLM 기능을 추가하는 것보다 중요한 것은 **LLM이 바꿀 수 있는
 - [모의 API·교정·공유 예산 검사](https://github.com/hoyhoy1227/whatfraud/blob/main/tools/tests/test-ai-chat.mjs)
 - 실제 화면: [시작](https://github.com/hoyhoy1227/whatfraud/blob/main/docs/images/start-screen.png) · [스마트폰 홈](https://github.com/hoyhoy1227/whatfraud/blob/main/docs/images/phone-home.png) · [메신저](https://github.com/hoyhoy1227/whatfraud/blob/main/docs/images/messenger.png)
 
-**다음 보강:** 실제 Gemini 응답의 동일 장면 전후 비교, 본인 커밋·이슈와 역할 연결, 버전이 명시된 자동 검사 실행 결과, 실사용자 검수 기록.
+**다음 보강:** 실제 Gemini 응답의 동일 장면 비교와 실브라우저·실기기 검수. 개인 기여 근거는 추후 추가합니다.
