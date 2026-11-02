@@ -1,78 +1,56 @@
-# 이호영 | AI & Software Developer
+# 이호영 | AI 데이터 · 한국어 NLP
 
-**AI 모델을 실험하고, 동작하는 소프트웨어로 연결합니다.**
+**한국어 데이터를 정리하고, AI 응답의 품질을 점검합니다.**
 
-국민대학교 AI빅데이터융합경영학과 / 데이터사이언스융합전공에서 AI·데이터를 공부하고 있습니다. 생성형 AI의 서비스 통합, 자연어 처리 모델 파인튜닝, 실험 결과에 근거한 문제 해결에 관심이 있습니다.
+국민대학교 AI빅데이터융합경영학과 / 데이터사이언스융합전공. 문장 데이터 처리, 언어 모델 학습·평가, 게임 대화의 오류 검토를 경험했습니다.
 
-**Contact** · [hoyhoy1227@gmail.com](mailto:hoyhoy1227@gmail.com)  
-**Portfolio** · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656) · [Figma · 본편 14장](https://www.figma.com/design/bIHsCT2RsHy4EvsFIcacor?node-id=3-2) · [GitHub](https://github.com/hoyhoy1227)  
-**Qualifications** · ADsP · SQLD · OPIc AL
+**Email** · [hoyhoy1227@gmail.com](mailto:hoyhoy1227@gmail.com)  
+**Portfolio** · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656) · [Figma · 14장](https://www.figma.com/design/bIHsCT2RsHy4EvsFIcacor?node-id=3-2)  
+**자격·어학** · ADsP · SQLD · OPIc AL
 
-[제작 중 실제 오류와 대응](projects/development-cases.md) · 게임의 이상 답변·무응답 · 수어의 추론 오류와 원문을 바꾼 유사 예시
+## 주요 프로젝트
 
-> **Problem → Approach → Implementation → Validation → Lessons Learned**
+### 01 · [한국어 → 한국수어 Gloss](projects/ksl-gloss.md)
 
-## Featured Projects
+한국어 문장을 수어의 글 표기인 Gloss로 바꾸는 언어 모델 실험입니다.
 
-### 01 · [사기방지위원회 — 금융사기 체험 웹 게임](projects/whatfraud.md)
+- **배경·목표(S/T):** 한국어 문장과 수어 표기는 어순·표현 방식이 다르고, 자료마다 표기 체계도 달랐습니다. 학습에 쓸 문장 쌍을 정리하고, 입력의 의미를 유지하는 변환 모델을 학습·평가하는 것이 목표였습니다.
+- **실행(A):** 원본 27,569행을 정규화·중복 제거해 27,027쌍으로 정리했습니다. 같은 한국어 문장이 학습·평가에 겹치지 않도록 나누고, 표기 체계에 맞춰 pko-T5를 LoRA로 학습했습니다. 입력이 달라도 같은 단어가 나오는 오류, 의미가 바뀌는 오류, 최종 모델의 표기·반복 오류를 구분해 검토했습니다.
+- **결과(R):** GKSL 고유 입력 142개·다중 정답 평가에서 WER 0.4602를 기록했습니다. NIKL 번호형 경로는 혼합 test 2,557행 중 700행에서 WER 0.6413입니다.
 
-**Generative AI · Software Engineering · Interactive Game**
+[구현·평가·원본 근거](projects/ksl-gloss.md)
 
-[실행 데모](https://whatfraud.hoyhoy1227.chatgpt.site/) · [GitHub 코드](https://github.com/hoyhoy1227/whatfraud) · [기술 사례 읽기](projects/whatfraud.md)
+### 02 · [사기방지위원회](projects/whatfraud.md)
 
-- 가상의 스마트폰에서 연락·기록을 비교하고 답장·보류·차단·가상 송금으로 대응하는 **2인 공동 개발 웹 게임**입니다. 보고서와 되감기로 다른 선택을 돌아봅니다.
-- **Gemini API**를 연결해 특정 장면에서 상황에 맞는 캐릭터 답변을 생성하도록 구성했습니다.
-- AI가 생성하는 대화와 별도로 게임 상태 엔진이 **사건·행동·가상 거래·결말**을 관리합니다.
-- 인물별 대화 맥락, 입력·응답 검증, 게임 내 AI 사용 한도(사건별 2/2/1회·회차 최대 5회), 요청당 최대 1회 응답 교정, **내장 대사 fallback**을 적용했습니다. 5회는 외부 API 호출 수의 상한이 아닙니다.
-- 실제 준호에게 본인 확인을 다시 권한 답변, 첨부 허용 목록 불일치와 과도한 문장 검사로 답변이 막힌 사례를 **관찰 → 원인 → 수정**으로 정리했습니다.
-- 기획·구현 전반, 기능·스토리 구성과 **Suno 음악 작업**에 참여했습니다. 구현은 팀 공동 결과입니다.
+가상의 스마트폰에서 연락과 기록을 비교하고, 답장·보류·차단·가상 송금으로 대응하는 금융사기 체험 웹 게임입니다.
 
-**핵심 경험:** LLM을 호출하는 기능보다, 모델이 실패해도 게임이 안정적으로 이어지는 **시스템 경계와 오류 처리**를 고민했습니다.
+- **배경·목표(S/T):** 생성형 AI를 게임 대화에 연결하자, 인물이 아는 사실과 답변이 어긋나거나 첨부 후 답변이 막히는 문제가 생겼습니다. 상황에 맞는 캐릭터 대화를 만들면서, 답변 실패에도 게임이 이어지도록 구성하는 것이 목표였습니다.
+- **실행(A):** Gemini의 답변 생성과 사건·잔액·결말을 관리하는 게임 엔진을 분리했습니다. 이미 한 행동과 인물이 아는 사실을 대화 문맥에 반영했습니다. 첨부 허용 목록의 화면·서버 차이를 맞추고, 답변 검사와 준비 대사로 실패에 대응했습니다.
+- **결과(R):** 3막의 플레이와 보고서·되감기를 제공하는 웹 데모를 구현했습니다. 실제 이상 답변·무응답 사례를 원인과 코드 수정에 연결해 기록했습니다.
 
-### 02 · [한국어 → 한국수어 Gloss 모델 파인튜닝](projects/ksl-gloss.md)
-
-**NLP · Seq2Seq · Fine-tuning · Evaluation**
-
-[팀 프로젝트 코드](https://github.com/molba2see/adv-pj-a/tree/main/llm) · [실험·평가 상세](projects/ksl-gloss.md)
-
-- 한국어 문장을 한국수어의 **Gloss 주석 시퀀스**로 변환하는 학회 팀 프로젝트입니다.
-- 수어 데이터 수집·전처리와 **pko-T5 기반 LoRA + `lm_head` 파인튜닝**에 참여했습니다.
-- 원본 27,569행에서 완전 중복을 제거한 **27,027쌍**의 데이터 처리 흐름을 정리했습니다.
-- 초기의 한 토큰 출력 붕괴·인물 표현 치환과 최종 모델의 표기·반복 오류를 기록했습니다. 원문 대신 새로 쓴 **설명용 유사 입력**으로 보여 줍니다.
-- GKSL의 142개 고유 입력 **다중 정답 평가에서 WER 0.4602**를 기록했습니다. 이 점수는 전체 데이터에 대한 평가가 아닙니다.
-
-- **NIKL 출처:** 국립국어원 모두의 말뭉치 **「한국수어-한국어 병렬 말뭉치」**입니다. 원본 데이터·원문 문장–Gloss 쌍은 비공개하며 처리 코드·절차·설정·집계만 공개합니다.
-- NIKL v4 경로는 번호형 혼합 test 2,557행 중 700행(국립국어원 2024 90행·2025 608행·재난안전 2행)을 repeat-safe 조건으로 평가해 **WER 0.6413**을 기록했습니다. 보존된 집계이며 GKSL과 직접 성능을 비교하지 않습니다.
-
-**핵심 경험:** 초기 반복 출력 문제, 서로 다른 Gloss 표기 체계, 데이터 누수와 평가 조건을 검토하며 **점수와 한계를 함께 설명하는 실험 습관**을 익혔습니다.
+[구현·평가·원본 근거](projects/whatfraud.md) · [게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/)
 
 ### 03 · [증권사 텍스트 데이터 분석](projects/financial-text-analysis.md)
 
-**Text Mining · NLP · Exploratory Analysis · 4인 팀**
+국내 5개 증권사의 뉴스·회사 블로그·종목토론방에서 주제와 감성 표현, 이용자 반응을 비교한 분석입니다.
 
-[분석 과정·결과·한계](projects/financial-text-analysis.md) · [Notion 포트폴리오](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)
+- **배경·목표(S/T):** 같은 증권사를 다루더라도 뉴스, 회사 콘텐츠, 투자자 글은 서로 다른 관점을 담고 있었습니다. 매체별로 무엇을 말하고 어떻게 반응하는지 구분해, 회사별 차이를 설명하는 것이 목표였습니다.
+- **실행(A):** 뉴스 1,286행·블로그 14,279행·종목토론 7,880행을 대상으로 목적에 맞게 전처리했습니다. 키워드 빈도와 LDA로 주요 이슈·반복 주제를 살폈습니다. KNU 사전 기반 감성 점수와 추천·비추천·댓글 반응을 따로 분석했습니다.
+- **결과(R):** 블로그의 34개 주제를 정리하고, 뉴스 이슈와 종목토론의 관심 차이를 비교했습니다. 삼성의 연금·ISA, 키움의 AI·리테일 등 수집 자료의 대표 이슈를 확인했습니다.
 
-- 국내 5개 증권사의 **뉴스·회사 블로그·종목토론방**을 비교했습니다. 실제 저장량은 뉴스 **1,286행**, 블로그 **14,279행**, 종목토론 **7,880행**입니다.
-- Selenium·네이버 API로 수집하고, 목적에 따라 Kiwi 전처리와 **soynlp → TF-IDF → LDA**를 분리했습니다. 5개 회사의 34개 토픽을 pyLDAvis로 살폈습니다.
-- KNU 기반 텍스트 감성과 추천·비추천 반응을 분리하고, 반응 점수·강한 우세 기준(±5)·시간대별 합계와 평균을 명시했습니다.
-- 원본 PDF·9개 노트북·저장 CSV·시각화 출력을 대조했습니다. 수집 건수·미국 포함 조건·반응 지표는 CSV에서 재계산했으며 전체 모델을 재학습한 결과는 아닙니다.
+[구현·평가·원본 근거](projects/financial-text-analysis.md)
 
-**핵심 경험:** 목적별 전처리와 지표를 설계하고 관찰과 해석을 구분했습니다. 의사라벨 분류 결과를 사람 정답 정확도로 제시하지 않고, TF-IDF를 분할 전에 적합한 평가 누수와 데이터 기간·중복 문제도 함께 기록했습니다. 팀 공동 결과이며 세부 개인 담당 범위는 원본에서 구분되지 않습니다.
+**NIKL 출처** · 국립국어원 모두의 말뭉치 「한국수어-한국어 병렬 말뭉치」(2024·2025). 원본 데이터·원문 문장–Gloss 쌍·복원 가능한 행 단위 자료는 비공개입니다. 처리 코드·절차·설정·집계만 공개합니다.
 
-## Tech Stack
+## 사용 기술
 
-| 분야 | 도구 및 기술 |
+| 분야 | 기술 |
 | --- | --- |
-| Programming | Python, Java, SQL, JavaScript / TypeScript |
-| AI / NLP | PyTorch, Hugging Face Transformers, PEFT / LoRA, scikit-learn |
-| Software | React, Next.js 호환 구조, Vinext / Vite, TypeScript, Gemini API, REST API, Git / GitHub |
-| Analysis & Experiments | pandas, NumPy, Jupyter Notebook, Google Colab |
-| Text Mining | Selenium, 네이버 API, Kiwi, soynlp, TF-IDF, scikit-learn LDA, pyLDAvis, KNU 기반 감성분석 |
-| Planning & Audio | 기능·스토리 구성, Suno |
+| 언어·협업 | Python · Java · SQL · JavaScript / TypeScript · Git / GitHub |
+| AI·자연어 처리 | PyTorch · Transformers · PEFT / LoRA · Gemini API |
+| 텍스트 분석 | pandas · scikit-learn · Selenium · Kiwi · soynlp · TF-IDF / LDA · pyLDAvis |
+| 웹 구현 | React · REST API |
 
-## Links
+[실제 제작 오류와 대응](projects/development-cases.md) · [검증·재현 보조 기록](verification/2026-11-01/README.md)
 
-- [GitHub Repository 목록](https://github.com/hoyhoy1227?tab=repositories)
-- [사기방지위원회 플레이](https://whatfraud.hoyhoy1227.chatgpt.site/)
-
-<sub>프로젝트별 상세 페이지는 확인 가능한 구현 근거, 평가 범위, 팀 프로젝트 내 역할을 구분해 작성했습니다.</sub>
+각 프로젝트는 팀 공동 결과입니다. 세부 개인 기여는 추후 보강하며, 평가 조건과 해석 한계는 상세 페이지에 명시했습니다.
