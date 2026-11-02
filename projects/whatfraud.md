@@ -2,29 +2,22 @@
 
 **가상의 스마트폰에서 연락과 기록을 비교하고, 답장·보류·차단·가상 송금으로 대응하는 금융사기 체험 웹 게임입니다.**
 
-2인 공동 개발
-
-## S · 배경
+> **참여 역할** · 기획 · 기능·스토리 구성 · Suno 음악 작업  
+> 2인 공동 개발
 
 생성형 AI를 게임 대화에 연결하자, 인물이 아는 사실과 답변이 어긋나거나 첨부 후 답변이 막히는 문제가 생겼습니다.
 
-## T · 목표
-
 상황에 맞는 캐릭터 대화를 만들면서, 답변 실패에도 게임이 이어지도록 구성하는 것이 목표였습니다.
 
-## A · 실행
+## 구현 과정
 
 - Gemini의 답변 생성과 사건·잔액·결말을 관리하는 게임 엔진을 분리했습니다.
 - 이미 한 행동과 인물이 아는 사실을 대화 문맥에 반영했습니다.
 - 첨부 허용 목록의 화면·서버 차이를 맞추고, 답변 검사와 준비 대사로 실패에 대응했습니다.
 
-## R · 결과와 확인 범위
+## 주요 결과
 
 3막의 플레이와 보고서·되감기를 제공하는 웹 데모를 구현했습니다. 실제 이상 답변·무응답 사례를 원인과 코드 수정에 연결해 기록했습니다.
-
-마지막 보완 뒤 실응답 재검수 기록이 없는 항목은 해결 완료나 성공률로 표시하지 않습니다.
-
-**참여 범위:** 기획·기능·스토리 구성과 Suno 음악 작업 참여. 팀 공동 구현입니다. 기능별 개인 기여의 상세 근거는 추후 보강합니다.
 
 [게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/) · [소스 코드](https://github.com/hoyhoy1227/whatfraud) · [실제 제작 오류](development-cases.md)
 
@@ -87,7 +80,7 @@ LLM 기능을 추가하는 것보다 중요한 것은 **LLM이 바꿀 수 있는
 
 ## Contribution & Evidence
 
-- **개인 기여:** 2인 공동 개발에서 기획·구현 전반, 기능·스토리 구성과 Suno 음악 작업에 참여했습니다. 구현은 팀 공동 결과입니다. 기능별 상세 담당은 개인 커밋·이슈 근거로 구체화할 수 있습니다.
+- **개인 기여:** 2인 공동 개발에서 기획·구현 전반, 기능·스토리 구성과 Suno 음악 작업에 참여했습니다. 구현은 팀 공동 결과입니다. 
 - [게임 소개 및 개발 시행착오](https://github.com/hoyhoy1227/whatfraud/blob/main/README.md)
 - [AI API 코드](https://github.com/hoyhoy1227/whatfraud/blob/main/app/api/ai-chat/route.ts)
 - [프로젝트 구조](https://github.com/hoyhoy1227/whatfraud/blob/main/docs/development/PROJECT_STRUCTURE.md)
@@ -96,7 +89,7 @@ LLM 기능을 추가하는 것보다 중요한 것은 **LLM이 바꿀 수 있는
 - [모의 API·교정·공유 예산 검사](https://github.com/hoyhoy1227/whatfraud/blob/main/tools/tests/test-ai-chat.mjs)
 - 실제 화면: [시작](https://github.com/hoyhoy1227/whatfraud/blob/main/docs/images/start-screen.png) · [스마트폰 홈](https://github.com/hoyhoy1227/whatfraud/blob/main/docs/images/phone-home.png) · [메신저](https://github.com/hoyhoy1227/whatfraud/blob/main/docs/images/messenger.png)
 
-**다음 보강:** 실제 Gemini 응답의 동일 장면 비교와 실브라우저·실기기 검수. 개인 기여 근거는 추후 추가합니다.
+**다음 보강:** 실제 Gemini 응답의 동일 장면 비교와 실브라우저·실기기 검수. 
 
 
 </details>
