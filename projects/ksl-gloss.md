@@ -1,7 +1,37 @@
-# Case Study 02 · 한국어 → 한국수어 Gloss 모델 파인튜닝
+# 01 · 한국어 → 한국수어 Gloss
 
-**프로젝트:** X:AI 학회 팀 프로젝트 (2026.07–08)  
-**저장소:** [adv-pj-a/llm](https://github.com/molba2see/adv-pj-a/tree/main/llm)
+**한국어 문장을 수어의 글 표기인 Gloss로 바꾸는 언어 모델 실험입니다.**
+
+X:AI 학회 팀 프로젝트
+
+## S · 배경
+
+한국어 문장과 수어 표기는 어순·표현 방식이 다르고, 자료마다 표기 체계도 달랐습니다.
+
+## T · 목표
+
+학습에 쓸 문장 쌍을 정리하고, 입력의 의미를 유지하는 변환 모델을 학습·평가하는 것이 목표였습니다.
+
+## A · 실행
+
+- 원본 27,569행을 정규화·중복 제거해 27,027쌍으로 정리했습니다.
+- 같은 한국어 문장이 학습·평가에 겹치지 않도록 나누고, 표기 체계에 맞춰 pko-T5를 LoRA로 학습했습니다.
+- 입력이 달라도 같은 단어가 나오는 오류, 의미가 바뀌는 오류, 최종 모델의 표기·반복 오류를 구분해 검토했습니다.
+
+## R · 결과와 확인 범위
+
+GKSL 고유 입력 142개·다중 정답 평가에서 WER 0.4602를 기록했습니다. NIKL 번호형 경로는 혼합 test 2,557행 중 700행에서 WER 0.6413입니다.
+
+WER는 낮을수록 좋은 단어 오류 지표입니다. 서로 다른 평가셋의 점수는 직접 비교할 수 없고, test를 모델 선택에 반복 참고한 한계가 있습니다.
+
+**참여 범위:** 데이터 수집·전처리·파인튜닝 참여. 학회 팀 공동 결과입니다. 기능별 개인 기여의 상세 근거는 추후 보강합니다.
+
+**NIKL 출처: 국립국어원 모두의 말뭉치 「한국수어-한국어 병렬 말뭉치」(2024·2025). 원본·원문 문장–Gloss 쌍·복원 가능한 행 단위 자료는 비공개하며 처리 방법과 집계만 공유합니다.**
+
+[코드](https://github.com/molba2see/adv-pj-a/tree/main/llm) · [공식 제공처](https://kli.korean.go.kr/corpus/) · [실제 오류와 설명용 예시](development-cases.md)
+
+<details>
+<summary>처리 과정·평가 조건·원본 근거 자세히 보기</summary>
 
 ## Problem
 
@@ -76,3 +106,6 @@ GKSL 0.4602는 **전체 데이터셋 점수가 아닙니다**. 두 평가의 표
 구현 근거: [원본 보존·문장 그룹 분할](https://github.com/molba2see/adv-pj-a/blob/main/llm/data_processing/prepare_ksl_text_data.py) · [다중 참조 평가 코드](https://github.com/molba2see/adv-pj-a/blob/main/llm/evaluation/evaluate_multiref.py) · [최종 학습 설정](https://github.com/molba2see/adv-pj-a/blob/main/llm/configs/nikl_v4.run_config.json)
 
 **다음 보강:** 최종 가중치로 직접 작성한 입력의 실제 출력·실패를 확인하고 별도 미사용 평가셋·수어 전문가 검수를 추가합니다. 개인 기여 근거는 추후 추가합니다.
+
+
+</details>
