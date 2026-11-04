@@ -1,11 +1,33 @@
 # 01 · 한국어 → 한국수어(KSL) Gloss
 
-**한국어 문장을 한국수어의 글 표기인 Gloss로 변환하는 모델 실험입니다.**
+**한국어 문장을 한국수어 표현을 글로 적은 Gloss로 바꾸는 모델을 개발했습니다.**
 
 > **참여 역할** · 데이터 수집·전처리 · 모델 파인튜닝  
 > X:AI 학회 팀 프로젝트
 
-기존 데이터 준비 과정에서 문장 쌍 27,027개를 정리하고, 같은 한국어 입력을 하나의 그룹으로 묶어 학습과 평가를 나눴습니다. v8 개선 실험은 2024 중심 기준선과 2025 비중이 큰 평가 자료 사이의 차이를 줄이는 데서 출발했습니다.
+## 문장 변환 결과
+
+| 한국어 입력 | 생성된 한국수어 Gloss |
+| --- | --- |
+| 친구가 같이 가자고 말했어요. | `친구1 함께1 가다1 말하다1` |
+
+공개 실험 기록의 합성 문장입니다. ‘친구’, ‘함께 가다’, ‘말하다’에 해당하는 표기가 출력에 나타납니다. [문장 변환 기록](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm#문법-설명-계층-개선)
+
+문법 설명은 Gloss 생성과 별도로 인용·청유 같은 문법 특성과 근거를 보여 줍니다. [초기 출력 오류와 대응](development-cases.md)
+
+## 모델을 만들고 발전시킨 과정
+
+### 한국어 문장을 Gloss로 변환하는 모델
+
+한국어 언어 모델 pko-T5에 LoRA와 출력층 학습을 적용했습니다. 같은 한국어 문장이 학습과 평가에 겹치지 않도록 문장 단위로 묶어 나누고, 번호형 NIKL과 번호 없는 GKSL의 표기를 분리했습니다. 기본 번역에는 문법 검색 결과를 넣지 않고, 설명에만 사용했습니다. [모델 구조와 학습 코드](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
+
+### v4 · 2024 문장으로 번호형 모델 개선
+
+기존 번호형 어댑터를 NIKL 2024 학습 자료 706행으로 이어서 학습해 v4를 만들었습니다. 2024 평가로 먼저 확인한 뒤, 2024·2025 혼합 평가를 거쳐 공통 번호형 모델로 선택했습니다. pko-T5 기반 어댑터에 LoRA와 출력층 학습을 적용해 3 epoch 추가 학습했습니다. 당시 2024 단일 정답 평가 90행에서 기존 v2 대비 WER가 0.8643에서 0.8462로 내려갔습니다. 이후 혼합 700행의 별도 평가에서도 오류율이 낮아져 공통 경로로 채택했습니다. [v4 학습 설정](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/configs/nikl_v4.run_config.json) · [2024 모델 선택](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/model_selection_v4.json) · [공통 경로 선택](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/model_selection_general_nikl_v1.json)
+
+### v8 · 2025 문장까지 학습 범위 확장
+
+2025 자료를 더해 학습 범위를 넓혔습니다. RSLoRA와 번호 보정을 적용하고, 2024 학습 문장의 괄호 주석을 정리해 자료별 학습 비중을 조정한 뒤 v8로 재학습했습니다. 2025 비중이 큰 평가에 맞춰 자료 범위를 넓히고, 2024 문장의 수형·화자 주석은 전처리로 정리했습니다. [단계별 실험 기록](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
 
 ## v8까지 개선한 과정
 
@@ -22,10 +44,6 @@
 - **데이터 분포** · 2025 자료를 추가한 뒤 전체 F1은 올랐지만 2024 F1은 0.3181에서 0.2636으로 내려갔습니다. 2024 입력 정리와 자료 균형 조정 이후 v8에서 0.3920까지 회복했습니다. 같은 2024 부분집합의 WER는 v4 0.8389, v8 0.8447로, 지표에 따라 변화가 달랐습니다. [전처리 코드](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/data_processing/clean_nikl2024_meta.py) · [코퍼스별 결과](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
 - **학습 방식** · 검증 집계에서 단순 rank 증가와 DoRA보다 RSLoRA의 Token F1이 높았습니다. 최종 v8 점수는 데이터·번호 후처리·학습 설정을 함께 변경한 결과입니다. [LoRA 변형 비교](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_lora_variant_experiments.json)
 - **별도 평가** · GKSL은 고유 입력 142개의 기존 다중 정답 평가에서 WER 0.4602를 기록했습니다. 과거 NIKL WER 0.6413은 혼합 test 2,557행 중 700행의 행 단위 기록입니다. [GKSL 기록](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/gksl_v1_multiref.json) · [기존 NIKL 기록](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/nikl_v4_repeat_safe_test700.json)
-
-## 입력과 출력
-
-v8 실험 기록의 합성 예시입니다. “친구가 같이 가자고 말했어요.” → `친구1 함께1 가다1 말하다1` 문법 설명에서 인용·청유 자질과 문법서 근거를 별도로 보여 줍니다. [v8 예시와 구현 설명](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm#문법-설명-계층-개선) · [이전 모델의 오류 사례](development-cases.md)
 
 <details>
 <summary>공개 코드에서 확인한 재현 범위</summary>
