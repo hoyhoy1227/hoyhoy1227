@@ -1,43 +1,44 @@
-# 01 · 한국어 → 한국수어 Gloss
+# 01 · 한국어 → 한국수어(KSL) Gloss
 
-**한국어 문장을 수어의 글 표기인 Gloss로 바꾸는 언어 모델 실험입니다.**
+**한국어 문장을 한국수어의 글 표기인 Gloss로 변환하는 모델 실험입니다.**
 
 > **참여 역할** · 데이터 수집·전처리 · 모델 파인튜닝  
 > X:AI 학회 팀 프로젝트
 
-한국어 문장과 수어 표기는 어순·표현 방식이 다르고, 자료마다 표기 체계도 달랐습니다.
+기존 데이터 준비 과정에서 문장 쌍 27,027개를 정리하고, 같은 한국어 입력을 하나의 그룹으로 묶어 학습과 평가를 나눴습니다. v8 개선 실험은 2024 중심 기준선과 2025 비중이 큰 평가 자료 사이의 차이를 줄이는 데서 출발했습니다.
 
-학습에 쓸 문장 쌍을 정리하고, 입력의 의미를 유지하는 변환 모델을 학습·평가하는 것이 목표였습니다.
+## v8까지 개선한 과정
 
-## 구현 과정
+| 단계 | 바꾼 점 | WER ↓ | Token F1 ↑ |
+| --- | --- | ---: | ---: |
+| v4 기준선 | NIKL 2024 자료로 학습 | 0.6400 | 0.4934 |
+| 2025 자료 추가 | 통합 번호형 데이터로 LoRA 재학습 | 0.6045 | 0.5384 |
+| 학습 방식 비교 | RSLoRA(r32, alpha 64) 채택과 번호 재교정 | 0.5800 | 0.5649 |
+| 2024 입력 정리 | 학습 문장의 괄호 주석 제거와 제곱근 기준 코퍼스 균형 | 0.5731 | 0.5778 |
+| v8 | 3 epoch, dropout 0.1, 학습률 2e-4, 조기 종료와 최적 체크포인트 복원 | **0.5391** | **0.6162** |
 
-- 원본 27,569행을 정규화·중복 제거해 27,027쌍으로 정리했습니다.
-- 같은 한국어 문장이 학습·평가에 겹치지 않도록 나누고, 표기 체계에 맞춰 pko-T5를 LoRA로 학습했습니다.
-- 입력이 달라도 같은 단어가 나오는 오류, 의미가 바뀌는 오류, 최종 모델의 표기·반복 오류를 구분해 검토했습니다.
+동일한 NIKL 일반 700문장 다중 정답 벤치마크에서 고유 입력 695개(2025 608개, 2024 85개, 재난안전 2개)를 비교했습니다. 반복 억제 디코딩은 beam 4, length penalty 1.0, repetition penalty 1.03, 3-gram 반복 차단입니다. WER는 단어 단위 편집 오류를, Token F1은 순서를 제외한 토큰 일치를 요약합니다. 이 벤치마크는 모델 개선 중 반복해서 참고했습니다. [실험 집계](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
 
-## 주요 결과
+- **데이터 분포** · 2025 자료를 추가한 뒤 전체 F1은 올랐지만 2024 F1은 0.3181에서 0.2636으로 내려갔습니다. 2024 입력 정리와 자료 균형 조정 이후 v8에서 0.3920까지 회복했습니다. 같은 2024 부분집합의 WER는 v4 0.8389, v8 0.8447로, 지표에 따라 변화가 달랐습니다. [전처리 코드](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/data_processing/clean_nikl2024_meta.py) · [코퍼스별 결과](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
+- **학습 방식** · 검증 집계에서 단순 rank 증가와 DoRA보다 RSLoRA의 Token F1이 높았습니다. 최종 v8 점수는 데이터·번호 후처리·학습 설정을 함께 변경한 결과입니다. [LoRA 변형 비교](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_lora_variant_experiments.json)
+- **별도 평가** · GKSL은 고유 입력 142개의 기존 다중 정답 평가에서 WER 0.4602를 기록했습니다. 과거 NIKL WER 0.6413은 혼합 test 2,557행 중 700행의 행 단위 기록입니다. [GKSL 기록](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/gksl_v1_multiref.json) · [기존 NIKL 기록](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/nikl_v4_repeat_safe_test700.json)
 
-GKSL 고유 입력 142개·다중 정답 평가에서 WER 0.4602를 기록했습니다. NIKL 번호형 경로는 혼합 test 2,557행 중 700행에서 WER 0.6413입니다.
+## 입력과 출력
 
-WER는 낮을수록 좋은 단어 오류 지표입니다. 서로 다른 평가셋의 점수는 직접 비교할 수 없고, test를 모델 선택에 반복 참고한 한계가 있습니다.
-
-**출처** · 국립국어원 모두의 말뭉치 「한국수어-한국어 병렬 말뭉치」(2024·2025)
-
-
-### 입력과 출력을 비교한 오류 사례
-
-유사 입력으로 재구성한 오류 유형입니다. 출력은 당시 기록에서 발췌한 부분입니다.
-
-| 입력 예시 → 관찰된 출력 조각 | 문제점 |
-| --- | --- |
-| “주말에 전시를 보러 갈래요.” → `지시1` | 문장 내용과 무관한 한 단어만 출력 (초기 KE-T5) |
-| “동료가 없어 혼자 점심을 먹었어요.” → `할아버지1` | 입력에 없는 인물을 뜻하는 표현 생성 (초기 KE-T5) |
-| “손짓의 뜻을 설명해 줄래요?” → `제스처 제스처` | 표기 번호 누락과 같은 단어 반복 (최종 pko-T5) |
-
-[코드](https://github.com/molba2see/adv-pj-a/tree/main/llm) · [공식 제공처](https://kli.korean.go.kr/corpus/) · [실제 오류와 설명용 예시](development-cases.md)
+v8 실험 기록의 합성 예시입니다. “친구가 같이 가자고 말했어요.” → `친구1 함께1 가다1 말하다1` 문법 설명에서 인용·청유 자질과 문법서 근거를 별도로 보여 줍니다. [v8 예시와 구현 설명](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm#문법-설명-계층-개선) · [이전 모델의 오류 사례](development-cases.md)
 
 <details>
-<summary>처리 과정·평가 조건·원본 근거 자세히 보기</summary>
+<summary>공개 코드에서 확인한 재현 범위</summary>
+
+- 공개 학습 CLI의 LoRA 설정에는 RSLoRA 옵션이 없으며, 기본 NIKL 모델 선택은 v4를 가리킵니다. v8 수치는 실험 보고서의 집계입니다. [학습 코드](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/training/train.py) · [모델 선택 코드](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/core/model_router.py)
+- 문법 설명 보고서는 자질 감지 recall 0.90을 기록합니다. 같은 커밋의 추출 규칙과 공개 검증 문장 20개로 확인한 값은 0.6667(30개 중 20개 감지)이며, 자체 작성한 “어디에 계세요?”도 의문과 명령·청유에 함께 잡혔습니다. 설명 검색 평가는 이 확인 범위에서 제외했습니다. [검증 코드](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/evaluation/validate_explanation.py) · [감지 규칙](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/core/retriever.py) · [설명 보고서](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_explanation_validation.json)
+
+</details>
+
+**출처** · 국립국어원 모두의 말뭉치 「한국수어-한국어 병렬 말뭉치」(2024·2025). [공식 제공처](https://kli.korean.go.kr/corpus/)
+
+<details>
+<summary>v4 이전 데이터 처리·기존 평가 기록</summary>
 
 ## Problem
 
@@ -57,7 +58,7 @@ WER는 낮을수록 좋은 단어 오류 지표입니다. 서로 다른 평가�
 
 `NFKC 정규화 → 문장/Gloss 중복 제거 → 문장 그룹 단위 분할 → 표기 체계 분리 → 학습`으로 구성했습니다. 같은 한국어 입력이 서로 다른 데이터 분할에 들어가지 않게 처리했습니다.
 
-## Model & Evaluation
+## 기존 모델과 평가
 
 - **Base:** `paust/pko-t5-base`
 - **Fine-tuning:** LoRA(`r=16`, `alpha=32`, `dropout=0.05`) + `lm_head` 학습
