@@ -10,7 +10,7 @@
 
 ## 주요 프로젝트
 
-### 01 · [한국어 → 한국수어 Gloss](projects/ksl-gloss.md)
+### 01 · [한국어 → 한국수어 Gloss](https://github.com/molba2see/adv-pj-a/tree/main/llm)
 
 한국어 문장을 수어의 글 표기인 Gloss로 바꾸는 언어 모델 실험입니다.
 
@@ -21,9 +21,9 @@
 - **구현한 내용:** 원본 27,569행을 정규화·중복 제거해 27,027쌍으로 정리했습니다. 같은 한국어 문장이 학습·평가에 겹치지 않도록 나누고, 표기 체계에 맞춰 pko-T5를 LoRA로 학습했습니다. 입력이 달라도 같은 단어가 나오는 오류, 의미가 바뀌는 오류, 최종 모델의 표기·반복 오류를 구분해 검토했습니다.
 - **주요 결과:** GKSL 고유 입력 142개·다중 정답 평가에서 WER 0.4602를 기록했습니다. NIKL 번호형 경로는 혼합 test 2,557행 중 700행에서 WER 0.6413입니다.
 
-[구현·평가·원본 근거](projects/ksl-gloss.md)
+[구현·평가·원본 근거](https://github.com/molba2see/adv-pj-a/tree/main/llm)
 
-### 02 · [사기방지위원회](projects/whatfraud.md)
+### 02 · [사기방지위원회](https://github.com/hoyhoy1227/whatfraud)
 
 가상의 스마트폰에서 연락과 기록을 비교하고, 답장·보류·차단·가상 송금으로 대응하는 금융사기 체험 웹 게임입니다.
 
@@ -34,7 +34,7 @@
 - **구현한 내용:** Gemini의 답변 생성과 사건·잔액·결말을 관리하는 게임 엔진을 분리했습니다. 이미 한 행동과 인물이 아는 사실을 대화 문맥에 반영했습니다. 첨부 허용 목록의 화면·서버 차이를 맞추고, 답변 검사와 준비 대사로 실패에 대응했습니다.
 - **주요 결과:** 3막의 플레이와 보고서·되감기를 제공하는 웹 데모를 구현했습니다. 실제 이상 답변·무응답 사례를 원인과 코드 수정에 연결해 기록했습니다.
 
-[구현·평가·원본 근거](projects/whatfraud.md) · [게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/)
+[구현·평가·원본 근거](https://github.com/hoyhoy1227/whatfraud) · [게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/)
 
 ### 03 · [증권사 텍스트 데이터 분석](projects/financial-text-analysis.md)
 
