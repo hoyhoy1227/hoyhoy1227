@@ -12,16 +12,24 @@
 
 ### 01 · [한국어 → 한국수어(KSL) Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
 
-한국어 문장을 한국수어의 글 표기인 Gloss로 변환하는 모델 실험입니다.
+한국어 문장을 한국수어 표현을 글로 적은 Gloss로 바꾸는 모델을 개발했습니다.
 
 > **참여 역할** · 데이터 수집·전처리 · 모델 파인튜닝  
 > X:AI 학회 팀 프로젝트
 
-**개선 과정** · 2025 자료를 학습에 추가하고, LoRA 변형을 비교해 RSLoRA를 채택했습니다. 2024 학습 입력의 괄호 주석을 정리하고 코퍼스 균형과 학습 설정을 조정했습니다.
+| 한국어 입력 | 생성된 한국수어 Gloss |
+| --- | --- |
+| 친구가 같이 가자고 말했어요. | `친구1 함께1 가다1 말하다1` |
 
-**주요 결과** · 같은 NIKL 다중 정답 벤치마크(700문장 중 고유 입력 695개)에서 v4 → v8 WER 0.6400 → 0.5391, Token F1 0.4934 → 0.6162를 기록했습니다. GKSL은 고유 입력 142개의 기존 다중 정답 평가에서 WER 0.4602를 기록했습니다.
+공개 실험 기록의 합성 문장입니다. ‘친구’, ‘함께 가다’, ‘말하다’에 해당하는 표기가 출력에 나타납니다. [문장 변환 기록](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm#문법-설명-계층-개선)
 
-[개선 과정과 평가 조건](projects/ksl-gloss.md) · [v4–v8 실험 집계](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
+- **모델 개발** · pko-T5를 LoRA와 출력층 학습으로 조정하고, NIKL 번호형과 GKSL 번호 없는 표기에 맞춰 모델을 나눴습니다.
+- **v4 개발** · 기존 번호형 모델에 2024 자료 706행을 추가 학습하고, 혼합 평가를 거쳐 NIKL 공통 모델로 선택했습니다.
+- **v8 개선** · 2025 자료로 학습 범위를 넓히고, RSLoRA·번호 보정·2024 문장 전처리를 적용해 다시 학습했습니다.
+
+**평가 결과** · 같은 NIKL 다중 정답 평가에서 v4와 v8을 비교했습니다. 700문장 중 고유 입력 695개에서 **WER 0.6400 → 0.5391**, **Token F1 0.4934 → 0.6162**를 기록했습니다. 번호 없는 GKSL 모델은 별도 다중 정답 평가의 고유 입력 142개에서 WER 0.4602를 기록했습니다.
+
+[모델 개발과 평가 조건](projects/ksl-gloss.md) · [v4–v8 실험 집계](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
 
 ### 02 · [사기방지위원회](https://github.com/hoyhoy1227/whatfraud)
 
