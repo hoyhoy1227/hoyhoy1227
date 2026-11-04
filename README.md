@@ -10,7 +10,7 @@
 
 ## 주요 프로젝트
 
-### 01 · [한국어 → 한국수어 Gloss](https://github.com/molba2see/adv-pj-a/tree/main/llm)
+### 01 · [한국어 → 한국수어 Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
 
 한국어 문장을 수어의 글 표기인 Gloss로 바꾸는 언어 모델 실험입니다.
 
@@ -21,7 +21,7 @@
 - **구현한 내용:** 원본 27,569행을 정규화·중복 제거해 27,027쌍으로 정리했습니다. 같은 한국어 문장이 학습·평가에 겹치지 않도록 나누고, 표기 체계에 맞춰 pko-T5를 LoRA로 학습했습니다. 입력이 달라도 같은 단어가 나오는 오류, 의미가 바뀌는 오류, 최종 모델의 표기·반복 오류를 구분해 검토했습니다.
 - **주요 결과:** GKSL 고유 입력 142개·다중 정답 평가에서 WER 0.4602를 기록했습니다. NIKL 번호형 경로는 혼합 test 2,557행 중 700행에서 WER 0.6413입니다.
 
-[구현·평가·원본 근거](https://github.com/molba2see/adv-pj-a/tree/main/llm)
+[구현·평가·원본 근거](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
 
 ### 02 · [사기방지위원회](https://github.com/hoyhoy1227/whatfraud)
 
