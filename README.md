@@ -36,7 +36,7 @@
 
 [구현·평가·원본 근거](https://github.com/hoyhoy1227/whatfraud) · [게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/)
 
-### 03 · [증권사 텍스트 데이터 분석](projects/financial-text-analysis.md)
+### 03 · [증권사 텍스트 데이터 분석](https://app.notion.com/p/9c428e602e8c47c98ea96ea5edb8d5d9?source=copy_link)
 
 국내 5개 증권사의 뉴스·회사 블로그·종목토론방에서 주제와 감성 표현, 이용자 반응을 비교한 분석입니다.
 
