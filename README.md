@@ -1,76 +1,57 @@
-# 이호영 | AI 데이터 · 한국어 NLP
+# 이호영 | 한국어 데이터 · AI 대화
 
-**한국어 데이터를 정리하고, AI 응답의 품질을 점검합니다.**
+**한국어 문장과 대화를 살피고, 문제의 원인을 찾아 고칩니다.**
 
-국민대학교 AI빅데이터융합경영학과 / 데이터사이언스융합전공. 문장 데이터 처리, 언어 모델 학습·평가, 게임 대화의 오류 검토를 경험했습니다.
+국민대학교 AI빅데이터융합경영학과 / 데이터사이언스융합전공. 학습 문장 정리, 언어 모델 실험, AI 대화의 맥락 검토를 경험했습니다.
 
-**Email** · [hoyhoy1227@gmail.com](mailto:hoyhoy1227@gmail.com)  
-**Portfolio** · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656) · [Figma · 14장](https://www.figma.com/design/bIHsCT2RsHy4EvsFIcacor?node-id=3-2)  
-**자격·어학** · ADsP · SQLD · OPIc AL
+[hoyhoy1227@gmail.com](mailto:hoyhoy1227@gmail.com) · [전체 포트폴리오 PDF](portfolio/Lee_Hoyoung_Portfolio.pdf) · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)  
+ADsP · SQLD · OPIc AL
 
-## 주요 프로젝트
+## 01 · [한국어 → 한국수어(KSL) Gloss](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss.md)
 
-### 01 · [한국어 → 한국수어(KSL) Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
-
-한국어 문장을 한국수어 Gloss로 변환하고, 문법서 근거를 담은 설명을 함께 제공하는 모델을 개발했습니다.
+한국어 문장을 수어의 글 표기인 Gloss로 변환하고, 관련 문법 근거를 함께 보여 주는 모델을 개발했습니다.
 
 > **참여 역할** · 데이터 수집·전처리 · 모델 파인튜닝  
 > X:AI 학회 팀 프로젝트
 
-| 한국어 문장 | 한국수어 Gloss · 문법서 예시 |
-| --- | --- |
-| **왜** 아직 도착하지 않았나요? | [도착하다] [아직] **[왜]** |
+- **다른 문장에도 같은 단어가 나옴** · 초기 모델이 ‘지시1’ 같은 출력으로 수렴했습니다. 소량 암기와 새 문장 변환을 나누어 확인하고, pko-T5에 LoRA와 출력층 학습을 적용했습니다.
+- **형식은 맞아도 뜻이 달라짐** · 입력에 없는 인물을 뜻하는 단어가 섞였습니다. Gloss 형식과 의미 보존을 따로 살피며 누락·추가된 의미를 기록했습니다.
+- **한 자료에 맞춘 모델의 약점** · 2024 중심 학습과 2025 비중이 큰 평가의 차이가 드러났습니다. 2024 추가 학습 모델(v4)에서 2025 자료까지 범위를 넓히고, 입력 주석·학습 비중·어댑터 방식을 다듬어 v8로 발전시켰습니다.
 
+변환 모델을 개발하고, 문장과 자료의 특성에 맞춰 학습을 보완했습니다. Gloss 출력과 함께 문법 특성·관련 문법서 근거를 제공합니다.
 
-- **모델 개발** · pko-T5를 LoRA와 출력층 학습으로 조정하고, NIKL 번호형과 GKSL 번호 없는 표기에 맞춰 모델을 나눴습니다.
-- **v4 개발** · 기존 번호형 모델에 2024 자료 706행을 추가 학습하고, 혼합 평가를 거쳐 NIKL 공통 모델로 선택했습니다.
-- **v8 개선** · 2025 자료로 학습 범위를 넓히고, RSLoRA·번호 보정·2024 문장 전처리를 적용해 다시 학습했습니다.
+[구현과 상세 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss.md)
 
-**실험 기록의 모델 출력** · “친구가 같이 가자고 말했어요.” → `친구1 함께1 가다1 말하다1`
+## 02 · [사기방지위원회](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/whatfraud.md)
 
-**함께 제공하는 문법 설명** · 인용과 청유를 감지하고, ‘함께 하자’고 제안하는 표현의 근거로 문법서 3.4절 ‘청유문’ 175쪽을 제시합니다. [합성 문장 실험 기록](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm#문법-설명-계층-개선)
-
-**평가 결과** · 같은 NIKL 다중 정답 평가에서 v4와 v8을 비교했습니다. 700문장 중 고유 입력 695개에서 **WER 0.6400 → 0.5391**, **Token F1 0.4934 → 0.6162**를 기록했습니다. 번호 없는 GKSL 모델은 별도 다중 정답 평가의 고유 입력 142개에서 WER 0.4602를 기록했습니다.
-
-[모델 개발과 평가 조건](projects/ksl-gloss.md) · [v4–v8 실험 집계](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
-
-### 02 · [사기방지위원회](https://github.com/hoyhoy1227/whatfraud)
-
-가상의 스마트폰에서 연락과 기록을 비교하고, 답장·보류·차단·가상 송금으로 대응하는 금융사기 체험 웹 게임입니다.
+가상의 스마트폰에서 연락과 기록을 비교하며 선택하는 금융사기 체험 웹 게임입니다. 제작 중 이상 답변과 무응답을 플레이 맥락에서 검토했습니다.
 
 > **참여 역할** · 기획 · 기능·스토리 구성 · Suno 음악 작업  
 > 2인 공동 개발
 
-- **프로젝트의 출발점:** 생성형 AI를 게임 대화에 연결하자, 인물이 아는 사실과 답변이 어긋나거나 첨부 후 답변이 막히는 문제가 생겼습니다. 상황에 맞는 캐릭터 대화를 만들면서, 답변 실패에도 게임이 이어지도록 구성하는 것이 목표였습니다.
-- **구현한 내용:** Gemini의 답변 생성과 사건·잔액·결말을 관리하는 게임 엔진을 분리했습니다. 이미 한 행동과 인물이 아는 사실을 대화 문맥에 반영했습니다. 첨부 허용 목록의 화면·서버 차이를 맞추고, 답변 검사와 준비 대사로 실패에 대응했습니다.
-- **주요 결과:** 3막의 플레이와 보고서·되감기를 제공하는 웹 데모를 구현했습니다. 실제 이상 답변·무응답 사례를 원인과 코드 수정에 연결해 기록했습니다.
+- **실제 친구가 다시 본인 확인을 권함** · 대화 상대의 정체성과 일반적인 예방 안내가 충돌했습니다. 인물이 아는 사실과 이미 끝낸 행동을 문맥에 넣고, 전달한 첨부에 먼저 반응하도록 보완했습니다.
+- **첨부를 보내면 답변이 막힘** · 화면과 서버의 첨부 허용 목록이 달랐습니다. 막힌 위치를 추적해 화면·서버·답변 처리가 같은 목록을 사용하도록 맞췄습니다.
 
-[구현·평가·원본 근거](https://github.com/hoyhoy1227/whatfraud) · [게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/)
+Gemini의 대화 생성과 게임 진행을 분리하고, 답변 실패에도 이어지는 흐름을 구성했습니다. 웹 데모에서 직접 플레이할 수 있습니다.
 
-### 03 · [증권사 텍스트 데이터 분석](https://app.notion.com/p/9c428e602e8c47c98ea96ea5edb8d5d9?source=copy_link)
+[구현과 상세 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/whatfraud.md) · [게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/)
 
-국내 5개 증권사(삼성·미래에셋·키움·NH·한화)의 뉴스·회사 블로그·종목토론방에서 주제와 감성 표현, 이용자 반응을 비교한 분석입니다.
+## 03 · [증권사 텍스트 데이터 분석](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/financial-text-analysis.md)
+
+국내 5개 증권사의 뉴스·회사 블로그·종목토론을 비교한 팀 분석입니다.
 
 > **참여 역할** · 텍스트 분석 팀 프로젝트 참여  
-> 4인 팀 수업 프로젝트
+> 4인 팀
 
-- **프로젝트의 출발점:** 같은 증권사를 다루더라도 뉴스, 회사 콘텐츠, 투자자 글은 서로 다른 관점을 담고 있었습니다. 매체별로 무엇을 말하고 어떻게 반응하는지 구분해, 회사별 차이를 설명하는 것이 목표였습니다.
-- **구현한 내용:** 뉴스 1,286행·블로그 14,279행·종목토론 7,880행을 대상으로 목적에 맞게 전처리했습니다. 키워드 빈도와 LDA로 주요 이슈·반복 주제를 살폈습니다. KNU 사전 기반 감성 점수와 추천·비추천·댓글 반응을 따로 분석했습니다.
-- **주요 결과:** 블로그의 34개 주제를 정리하고, 뉴스 이슈와 종목토론의 관심 차이를 비교했습니다. 삼성의 연금·ISA, 키움의 AI·리테일 등 수집 자료의 대표 이슈를 확인했습니다.
+- **감성과 추천을 같은 뜻으로 읽기 어려움** · 감성 점수와 추천·댓글은 서로 다른 반응을 나타냅니다. 분석 목적에 맞춰 전처리와 지표를 나누고, 회사별 수집 기간을 고려해 결과를 해석했습니다.
 
-[구현·평가·원본 근거](projects/financial-text-analysis.md)
+키워드·반복 주제·감성 표현·이용자 반응을 나눠 매체별 관점의 차이를 정리했습니다.
 
-**NIKL 출처** · 국립국어원 모두의 말뭉치 「한국수어-한국어 병렬 말뭉치」(2024·2025).
+[구현과 상세 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/financial-text-analysis.md)
 
 ## 사용 기술
 
-| 분야 | 기술 |
-| --- | --- |
-| 언어·협업 | Python · Java · SQL · JavaScript / TypeScript · Git / GitHub |
-| AI·자연어 처리 | PyTorch · Transformers · PEFT / LoRA · Gemini API |
-| 텍스트 분석 | pandas · scikit-learn · Selenium · Kiwi · soynlp · TF-IDF / LDA · pyLDAvis |
-| 웹 구현 | React · REST API |
+Python · pandas · PyTorch · Transformers · LoRA / RSLoRA · Gemini API · React · SQL · Git / GitHub  
+Selenium · Kiwi · soynlp · scikit-learn · TF-IDF / LDA · pyLDAvis · JavaScript / TypeScript
 
-[실제 제작 오류와 대응](projects/development-cases.md) · [검증·재현 보조 기록](verification/2026-11-01/README.md)
-
-평가 조건과 구현 기록은 각 프로젝트 상세 페이지에서 확인할 수 있습니다.
+NIKL 출처는 국립국어원 모두의 말뭉치 **「한국수어-한국어 병렬 말뭉치」**입니다. 평가 수치·조건과 코드 검토는 각 프로젝트 상세 기록에 정리했습니다.
