@@ -1,8 +1,8 @@
 # 01 · 한국어 → 한국수어(KSL) Gloss
 
-**한국어 문장을 한국수어 Gloss로 변환하고, 문법서 근거를 담은 설명을 함께 제공하는 모델을 개발했습니다.**
+**한국어 문장을 수어 단어의 글 표기인 Gloss로 바꾸는 모델을 개발했습니다. 어떤 문법이 쓰였는지도 문법서 근거와 함께 설명합니다.**
 
-> **참여 역할** · 데이터 수집·전처리 · 모델 파인튜닝  
+> **참여 역할** · 데이터 수집·정리 · 모델 추가 학습  
 > X:AI 학회 팀 프로젝트
 
 ## 한국어와 한국수어의 어순
@@ -15,11 +15,11 @@
 
 ## Gloss 변환과 문법 설명
 
-입력의 문법 특성을 감지해 관련 문법서 항목과 쪽수를 별도 설명으로 제공합니다. 위 한국어 문장을 공개 감지 코드에 넣으면 ‘부정’과 ‘의문’이 잡힙니다. [문법 특성 감지 코드](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/core/retriever.py)
+문장에서 부정·의문 같은 표현을 찾아 관련 문법서 항목과 쪽수를 보여 줍니다. 위 한국어 문장을 코드에 넣으면 ‘부정’과 ‘의문’으로 분류합니다. [문법 특성 감지 코드](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/core/retriever.py)
 
 **실험 기록의 모델 출력** · “친구가 같이 가자고 말했어요.” → `친구1 함께1 가다1 말하다1`
 
-**함께 제공하는 문법 설명** · 인용과 청유를 감지하고, ‘함께 하자’고 제안하는 표현의 근거로 문법서 3.4절 ‘청유문’ 175쪽을 제시합니다. [합성 문장 실험 기록](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm#문법-설명-계층-개선)
+**함께 제공하는 문법 설명** · ‘친구가 말했다’는 인용과 ‘같이 가자’는 제안을 찾습니다. 제안하는 표현의 근거로 문법서 3.4절 ‘청유문’ 175쪽을 보여 줍니다. [합성 문장 실험 기록](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm#문법-설명-계층-개선)
 
 [초기 출력 오류와 대응](development-cases.md)
 
@@ -27,17 +27,17 @@
 
 ### 한국어 문장을 Gloss로 변환하는 모델
 
-한국어 언어 모델 pko-T5에 LoRA와 출력층 학습을 적용했습니다. 같은 한국어 문장이 학습과 평가에 겹치지 않도록 문장 단위로 묶어 나누고, 번호형 NIKL과 번호 없는 GKSL의 표기를 분리했습니다. 기본 번역에는 문법 검색 결과를 넣지 않고, 설명에만 사용했습니다. [모델 구조와 학습 코드](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
+기존 언어 모델 pko-T5를 수어 표기에 맞춰 추가 학습했습니다(LoRA·출력층 학습). 같은 한국어 문장이 학습과 평가에 겹치지 않도록 나눴습니다. 번호가 붙는 NIKL과 번호 없는 GKSL은 서로 다른 설정으로 처리했습니다. 문법서 검색 결과는 번역에 섞지 않고 설명할 때만 사용했습니다. [모델 구조와 학습 코드](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
 
 ### v4 · 2024 문장으로 번호형 모델 개선
 
-기존 번호형 어댑터를 NIKL 2024 학습 자료 706행으로 이어서 학습해 v4를 만들었습니다. 2024 평가로 먼저 확인한 뒤, 2024·2025 혼합 평가를 거쳐 공통 번호형 모델로 선택했습니다. pko-T5 기반 어댑터에 LoRA와 출력층 학습을 적용해 3 epoch 추가 학습했습니다. 당시 2024 단일 정답 평가 90행에서 기존 v2 대비 WER가 0.8643에서 0.8462로 내려갔습니다. 이후 혼합 700행의 별도 평가에서도 오류율이 낮아져 공통 경로로 채택했습니다. [v4 학습 설정](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/configs/nikl_v4.run_config.json) · [2024 모델 선택](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/model_selection_v4.json) · [공통 경로 선택](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/model_selection_general_nikl_v1.json)
+기존 번호형 모델에 NIKL 2024 학습 자료 706행을 더해 LoRA와 출력층을 3 epoch 추가 학습한 버전이 v4입니다. 2024 단일 정답 평가 90행에서 v2 대비 WER가 0.8643에서 0.8462로 낮아졌습니다. 혼합 700행 평가도 확인한 뒤, 2024·2025 자료를 처리하는 공통 번호형 모델로 선택했습니다. [v4 학습 설정](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/configs/nikl_v4.run_config.json) · [2024 모델 선택](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/model_selection_v4.json) · [공통 경로 선택](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/model_selection_general_nikl_v1.json)
 
 ### v8 · 2025 문장까지 학습 범위 확장
 
-2025 자료를 더해 학습 범위를 넓혔습니다. RSLoRA와 번호 보정을 적용하고, 2024 학습 문장의 괄호 주석을 정리해 자료별 학습 비중을 조정한 뒤 v8로 재학습했습니다. 2025 비중이 큰 평가에 맞춰 자료 범위를 넓히고, 2024 문장의 수형·화자 주석은 전처리로 정리했습니다. [단계별 실험 기록](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
+평가에 많이 포함된 2025 문장도 학습하도록 자료를 늘렸습니다. 2024 학습 문장의 수형·화자 주석을 정리하고, 자료별 학습 비중과 RSLoRA·번호 보정을 조정해 v8로 다시 학습했습니다. [단계별 실험 기록](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
 
-## v8까지 개선한 과정
+## 바꾼 내용과 평가 결과
 
 | 단계 | 바꾼 점 | WER ↓ | Token F1 ↑ |
 | --- | --- | ---: | ---: |
@@ -66,13 +66,15 @@
 <details>
 <summary>v4 이전 데이터 처리·기존 평가 기록</summary>
 
-## Problem
+## 처음 만든 모델
 
-한국어 문장을 paust/pko-t5-base 모델을 이용해 **한국수어 Gloss 주석 시퀀스**로 변환하는 모델을 실험했습니다. Gloss는 수어 영상이나 비수지·공간 문법 전체를 표현하는 완성형 번역 결과물이 아닙니다.
+paust/pko-t5-base로 한국어 문장을 **한국수어 Gloss 단어열**로 바꾸는 모델을 실험했습니다. Gloss는 수어 단어를 글로 적은 표기입니다. 표정·몸짓·공간 활용까지 담는 수어 영상과는 표현 범위가 다릅니다.
 
-## Data Pipeline
+## 데이터를 학습 자료로 만드는 과정
 
 **NIKL 출처:** [국립국어원 모두의 말뭉치](https://kli.korean.go.kr/corpus/)의 **「한국수어-한국어 병렬 말뭉치」**(2024·2025 자료)입니다. 재난안전 자료와 GKSL3k의 텍스트 주석도 처리했습니다.
+
+NIKL 원문 데이터는 공개하지 않습니다. 처리 코드와 집계 결과, 직접 만든 유사 예시만 공유합니다.
 
 | 구분 | 원본 행 | 중복 제거 후 |
 | --- | ---: | ---: |
@@ -114,8 +116,8 @@ GKSL 0.4602는 **전체 데이터셋 점수가 아닙니다**. 두 평가의 표
 
 | 새로 쓴 유사 입력 · 설명용 | 실제 관찰한 오류 | 대응·남은 한계 |
 | --- | --- | --- |
-| 주말에 전시를 보러 갈래요. | 초기 KE-T5에서 입력이 달라도 `지시1` 한 토큰으로 수렴 | 빔 설정 비교와 소량 암기 진단, 새 문장 일반화를 분리해 확인. 데이터·표기·학습 구성 재검토 |
-| 동료가 없어 혼자 점심을 먹었어요. | 초기 KE-T5 진단에서 입력에 없는 `할아버지1` 생성 | Gloss 형식과 의미 보존을 구분. 소량 암기 성공을 일반화 성능으로 제시하지 않음 |
+| 주말에 전시를 보러 갈래요. | 초기 KE-T5에서 입력이 달라도 `지시1` 한 단어만 반복 | 빔 설정 비교와 소량 암기 진단, 새 문장 일반화를 분리해 확인. 데이터·표기·학습 구성 재검토 |
+| 동료가 없어 혼자 점심을 먹었어요. | 초기 KE-T5 진단에서 입력에 없는 `할아버지1` 생성 | 표기가 맞는지와 뜻을 담았는지를 따로 확인. 소량 암기 성공을 일반화 성능으로 제시하지 않음 |
 | 손짓의 뜻을 설명해 줄래요? | 최종 pko-T5 v4 저장 예측에 `제스처 제스처`가 남음 | 번호형 표기 이탈·짧은 반복이 남아 있으며 해결 완료로 표현하지 않음 |
 
 **모델 단계 구분:** 초기 KE-T5의 출력 붕괴·인물 치환과 최종 pko-T5 v4의 잔여 오류는 서로 다른 단계입니다. 최종 구성은 pko-T5 + LoRA/`lm_head`, 표기 체계별 어댑터, 기본 no-RAG이며, 여러 변경을 함께 적용했으므로 하나의 변경만으로 오류가 해결됐다고 단정하지 않습니다.
@@ -126,9 +128,9 @@ GKSL 0.4602는 **전체 데이터셋 점수가 아닙니다**. 두 평가의 표
 
 일부 test는 모델 선택에 반복 참고했습니다. 수어 전문가의 품질 평가·영상 생성·제품 API 배포는 평가 범위 밖입니다.
 
-## My Role / Evidence
+## 참여 역할과 근거
 
-학회 팀 프로젝트에서 **데이터 수집, 전처리 및 모델 파인튜닝에 참여**했습니다. 코드·실험은 공동 작업 결과이며, 개인 담당 범위는 팀 기록과 커밋을 확인해 구체화할 예정입니다.
+학회 팀 프로젝트에서 **데이터 수집·정리와 모델 추가 학습에 참여**했습니다. 코드와 실험은 팀 공동 결과입니다.
 
 [팀 README](https://github.com/molba2see/adv-pj-a/blob/main/llm/README.md) · [실험 기록](https://github.com/molba2see/adv-pj-a/blob/main/llm/docs/EXPERIMENTS.md) · [결과 표](https://github.com/molba2see/adv-pj-a/tree/main/llm/reports)
 
@@ -136,7 +138,7 @@ GKSL 0.4602는 **전체 데이터셋 점수가 아닙니다**. 두 평가의 표
 
 구현 근거: [원본 보존·문장 그룹 분할](https://github.com/molba2see/adv-pj-a/blob/main/llm/data_processing/prepare_ksl_text_data.py) · [다중 참조 평가 코드](https://github.com/molba2see/adv-pj-a/blob/main/llm/evaluation/evaluate_multiref.py) · [최종 학습 설정](https://github.com/molba2see/adv-pj-a/blob/main/llm/configs/nikl_v4.run_config.json)
 
-**다음 보강:** 최종 가중치로 직접 작성한 입력의 실제 출력·실패를 확인하고 별도 미사용 평가셋·수어 전문가 검수를 추가합니다. 
+**다음 확인:** 최종 모델에 직접 쓴 문장을 넣어 결과와 오류를 확인하고, 개발 중 사용하지 않은 평가 자료와 수어 전문가 검토를 추가합니다. 
 
 
 </details>
