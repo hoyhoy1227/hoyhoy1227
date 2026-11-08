@@ -14,7 +14,7 @@ ADsP · SQLD · OPIc AL
 | 문장·데이터 처리 | Python · pandas · Selenium · Kiwi · soynlp |
 | 언어 모델·실험 | PyTorch · Transformers · PEFT / LoRA · RSLoRA · scikit-learn |
 | 대화·웹 구현 | Gemini API · React · JavaScript / TypeScript |
-| 분석·협업 | SQL · TF-IDF / LDA · pyLDAvis · Git / GitHub |
+| 분석·협업 | SQL · TF-IDF · Git · GitHub |
 
 ---
 
