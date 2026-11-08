@@ -128,7 +128,7 @@ AI는 캐릭터의 답변을 만들고, 게임 엔진은 사건·잔액·결말�
 
 수집한 글 기준이며, 회사마다 수집 기간과 게시량이 다릅니다. ‘미국’ 언급은 제목과 본문에 해당 단어가 들어 있는지 센 결과입니다.
 
-[분석 방법·전체 결과](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/financial-text-analysis.md) · [원본 분석 요약](https://app.notion.com/p/9c428e602e8c47c98ea96ea5edb8d5d9)
+[증권사 분석 전체 내용](https://app.notion.com/p/9c428e602e8c47c98ea96ea5edb8d5d9?source=copy_link)
 
 ---
 
