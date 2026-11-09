@@ -1,4 +1,4 @@
-# 01 · 한국어 → 한국수어(KSL) Gloss
+# 01 · [한국어 → 한국수어(KSL) Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements)
 
 한국어 문장을 수어 단어의 글 표기인 Gloss로 바꾸는 모델을 개발했습니다. 어떤 문법이 쓰였는지도 문법서 근거와 함께 설명합니다.
 

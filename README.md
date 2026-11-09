@@ -18,7 +18,7 @@ ADsP · SQLD · OPIc AL
 
 ---
 
-## 01 · 한국어 → 한국수어(KSL) Gloss
+## 01 · [한국어 → 한국수어(KSL) Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements)
 
 한국어 문장을 수어 단어의 글 표기인 Gloss로 바꾸는 모델을 개발했습니다. 어떤 문법이 쓰였는지도 문법서 근거와 함께 설명합니다.
 
@@ -64,7 +64,7 @@ NIKL 출처는 국립국어원 모두의 말뭉치 **「한국수어-한국어 �
 
 ---
 
-## 02 · 사기방지위원회
+## 02 · [사기방지위원회](https://github.com/hoyhoy1227/whatfraud)
 
 AI 캐릭터와 실시간으로 대화하며 스마트폰 금융사기를 체험하는 웹 게임입니다. 내가 어떻게 반응하고 대처했는지, 선택에 맞춘 보고서로 돌아봅니다.
 
