@@ -60,7 +60,7 @@ ADsP · SQLD · OPIc AL
 
 NIKL 출처는 국립국어원 모두의 말뭉치 **「한국수어-한국어 병렬 말뭉치」**(2024·2025)입니다.
 
-[모델 개발·평가 조건·전체 실험 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss.md) · [초기 오류와 대응](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/development-cases.md) · [공식 제공처](https://kli.korean.go.kr/corpus/)
+[모델 개발·평가 조건·전체 실험 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss.md) · [초기 오류와 대응](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/development-cases.md) · [활용 데이터 출처](https://kli.korean.go.kr/corpus/)
 
 ---
 
