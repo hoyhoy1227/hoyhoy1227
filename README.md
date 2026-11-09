@@ -60,7 +60,7 @@ ADsP · SQLD · OPIc AL
 
 NIKL 출처는 국립국어원 모두의 말뭉치 **「한국수어-한국어 병렬 말뭉치」**(2024·2025)입니다.
 
-[모델 개발·평가 조건·전체 실험 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss.md) · [초기 오류와 대응](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/development-cases.md) · [활용 데이터 출처](https://kli.korean.go.kr/corpus/)
+[모델 개발·평가 조건·전체 실험 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss.md) · [오류와 대응](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss-errors.md) · [활용 데이터 출처](https://kli.korean.go.kr/corpus/)
 
 ---
 
@@ -103,7 +103,7 @@ AI 캐릭터와 실시간으로 대화하며 스마트폰 금융사기를 체험
 
 AI는 캐릭터의 답변을 만들고, 게임 엔진은 사건·잔액·결말을 관리합니다.
 
-[게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/) · [대화·맞춤 보고서·제작 과정](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/whatfraud.md) · [실제 오류와 수정 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/development-cases.md)
+[게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/) · [대화·맞춤 보고서·제작 과정](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/whatfraud.md) · [실제 오류와 수정 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/whatfraud-errors.md)
 
 ---
 

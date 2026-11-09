@@ -40,7 +40,7 @@
 
 NIKL 출처는 국립국어원 모두의 말뭉치 **「한국수어-한국어 병렬 말뭉치」**(2024·2025)입니다.
 
-[원본 모델 코드](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm) · [초기 오류와 대응](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/development-cases.md) · [공식 제공처](https://kli.korean.go.kr/corpus/)
+[원본 모델 코드](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm) · [오류와 대응](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss-errors.md) · [공식 제공처](https://kli.korean.go.kr/corpus/)
 
 <details>
 <summary>학습 설정·평가 수치·원본 근거 자세히 보기</summary>
@@ -146,7 +146,7 @@ GKSL 0.4602는 **전체 데이터셋 점수가 아닙니다**. 두 평가의 표
 
 입력 뒤 추론이 시작되지 않은 사례도 있었습니다. 초기 체크포인트의 `lm_head` 크기 `[64128, 512]`와 모델의 `[64100, 512]`가 달라 `size mismatch`로 중단됐고, 학습 시 토크나이저·확장 어휘 크기를 반영한 뒤 어댑터를 로드하도록 순서를 고쳤습니다.
 
-오류 사례는 당시 터미널 기록과 최종 패키지의 저장 예측을 바탕으로 정리했습니다. [오류 사례와 대응 과정](development-cases.md)에 상세 기록을, [CPU·합성 검증](../verification/2026-11-01/README.md)에 보조 근거를 두었습니다.
+오류 사례는 당시 터미널 기록과 최종 패키지의 저장 예측을 바탕으로 정리했습니다. [오류 사례와 대응 과정](ksl-gloss-errors.md)에 상세 기록을, [CPU·합성 검증](../verification/2026-11-01/README.md)에 보조 근거를 두었습니다.
 
 일부 test는 모델 선택에 반복 참고했습니다. 수어 전문가의 품질 평가·영상 생성·제품 API 배포는 평가 범위 밖입니다.
 

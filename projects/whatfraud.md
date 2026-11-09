@@ -35,7 +35,7 @@ AI 캐릭터와 실시간으로 대화하며 스마트폰 금융사기를 체험
 
 AI는 캐릭터의 답변을 만들고, 게임 엔진은 사건·잔액·결말을 관리합니다.
 
-[게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/) · [원본 코드](https://github.com/hoyhoy1227/whatfraud) · [실제 오류와 수정 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/development-cases.md)
+[게임 실행](https://whatfraud.hoyhoy1227.chatgpt.site/) · [원본 코드](https://github.com/hoyhoy1227/whatfraud) · [실제 오류와 수정 기록](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/whatfraud-errors.md)
 
 <details>
 <summary>대화 처리·보고서·오류 기록 자세히 보기</summary>
@@ -86,7 +86,7 @@ flowchart LR
 
 **배운 점:** 말투뿐 아니라 캐릭터가 아는 사실, 첨부 목록, 메시지 순서도 맞아야 대화가 자연스럽습니다. 답변이 없을 때는 모델 호출·첨부 처리·답변 검사를 나눠 원인을 찾았습니다.
 
-[상황 → 관찰 → 원인 → 수정 과정의 전체 사례](development-cases.md) · [원본 개발 기록](https://github.com/hoyhoy1227/whatfraud/blob/a4289958c7c66724df7d25b6475aacc7328b1c46/docs/development/DEVELOPMENT_JOURNEY.md)
+[상황 → 관찰 → 원인 → 수정 과정의 전체 사례](whatfraud-errors.md) · [원본 개발 기록](https://github.com/hoyhoy1227/whatfraud/blob/a4289958c7c66724df7d25b6475aacc7328b1c46/docs/development/DEVELOPMENT_JOURNEY.md)
 
 코드에 수정이 반영된 사실과 수정 뒤 실제 응답이 좋아진 사실은 구분했습니다. 일부 마지막 보완은 실응답 재검수가 없어 해결 완료·성공률로 표시하지 않았습니다. [자동·모의 검사는 보조 근거로 분리](../verification/2026-11-01/README.md)했습니다.
 
