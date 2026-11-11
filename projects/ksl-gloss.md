@@ -1,4 +1,4 @@
-# 01 · [한국어 → 한국수어(KSL) Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements)
+# 01 · [한국어 → 한국수어(KSL) Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
 
 한국어 문장을 수어 단어의 글 표기인 Gloss로 바꾸는 모델을 개발했습니다. 어떤 문법이 쓰였는지도 문법서 근거와 함께 설명합니다.
 
@@ -22,7 +22,7 @@
 
 직접 만든 문장의 실험 기록입니다. ‘친구가 말했다’는 인용과 ‘같이 가자’는 제안을 찾고, 문법서 3.4절 ‘청유문’ 175쪽을 근거로 보여 줍니다. 문장에서 부정·의문 같은 표현을 찾아 관련 문법서 항목과 쪽수를 제공하는 기능도 만들었습니다. [모델 출력과 문법 설명 기록](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm#문법-설명-계층-개선)
 
-### 다른 문장에도 같은 단어가 나왔다
+### 입력에 없던 단어도 나왔다
 
 입력은 실제 오류를 설명할 수 있는 비슷한 문장으로 바꿨습니다. 출력은 당시 기록의 일부입니다.
 
