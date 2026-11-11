@@ -2,19 +2,22 @@
 
 **AI와 데이터를 도구 삼아, 아이디어를 다양한 경험으로 옮깁니다.**
 
-국민대학교 AI빅데이터융합경영학과 / 데이터사이언스융합전공. 문장 데이터를 정리하고 언어 모델을 학습했습니다. AI가 상황에 맞게 답하는지도 살펴봤습니다.
+무엇을 만들고 어떻게 쓰일지 먼저 생각합니다. 목적에 맞게 도구를 고르고, 작은 차이와 예상 밖의 결과를 꼼꼼히 살피며 아이디어를 실제로 작동하는 결과물로 다듬어갑니다.
+
+국민대학교 AI빅데이터융합경영학과 / 데이터사이언스융합전공.
 
 [hoyhoy1227@gmail.com](mailto:hoyhoy1227@gmail.com) · [전체 포트폴리오 PDF](portfolio/Lee_Hoyoung_Portfolio.pdf) · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)  
 ADsP · SQLD · OPIc AL
 
 ## 사용 기술
 
-| 적용 분야 | 사용 기술 |
-| --- | --- |
-| 문장·데이터 처리 | Python · pandas · Selenium · Kiwi · soynlp |
-| AI·언어 모델 | PyTorch · Transformers · PEFT / LoRA |
-| 대화·웹 구현 | Gemini API · React · JavaScript / TypeScript |
-| 분석·협업 | SQL · TF-IDF · Git · GitHub |
+| 분야 | 사용 기술·도구 | 프로젝트 적용 |
+| --- | --- | --- |
+| 데이터 수집·처리 | Python · pandas · Selenium · Kiwi · soynlp | 수어 학습 입력 정리 · 블로그 수집·텍스트 정리 |
+| 모델 파인튜닝 | PyTorch · Transformers · PEFT / LoRA | pko-T5-base 기반 Text2Gloss 학습 |
+| AI 대화·웹 구현 | Gemini API · React · JavaScript / TypeScript | AI 대화 연동 · 웹 게임 공동 개발 |
+| 분석·협업 | SQL(SQLD) · TF-IDF · Git · GitHub | TF-IDF 주제 비교 · Git/GitHub 변경 이력 관리 |
+| AI 개발 도구 | ChatGPT · Codex | 구현 보조 · 오류 재현·검사 기준 정리 |
 
 ---
 
@@ -22,7 +25,7 @@ ADsP · SQLD · OPIc AL
 
 한국어 문장을 수어 단어의 글 표기인 Gloss로 바꾸는 모델을 개발했습니다. 어떤 문법이 쓰였는지도 문법서 근거와 함께 설명합니다.
 
-> **참여 역할** · 데이터 수집·정리 · 모델 추가 학습  
+> **참여 역할** · 데이터 수집·정리 · 모델 파인튜닝  
 > X:AI 학회 팀 프로젝트
 > **활동 기간** · 2026.07 ~ 2026.08
 
