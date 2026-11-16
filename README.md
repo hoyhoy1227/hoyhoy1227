@@ -11,11 +11,11 @@ ADsP · SQLD · OPIc AL
 
 | 분야 | 사용 기술·도구 | 프로젝트 적용 |
 | --- | --- | --- |
-| 데이터 수집·처리 | Python · pandas · Selenium · Kiwi · soynlp | 수어 학습 입력 정리 · 블로그 수집·텍스트 정리 |
-| 모델 파인튜닝 | PyTorch · Transformers · PEFT / LoRA | pko-T5-base 기반 Text2Gloss 학습 |
-| AI 대화·웹 구현 | Gemini API · React · JavaScript / TypeScript | AI 대화 연동 · 웹 게임 공동 개발 |
-| 분석·협업 | SQL(SQLD) · TF-IDF · Git · GitHub | TF-IDF 주제 비교 · Git/GitHub 변경 이력 관리 |
-| AI 개발 도구 | ChatGPT · Codex · Gemini | 구현 보조 · 오류 재현·검사 기준 정리 |
+| 데이터 수집·처리 | <img src="portfolio/assets/skills/data-processing.svg" alt="Python · pandas · Selenium · Kiwi · soynlp" width="480"> | 수어 학습 입력 정리 · 블로그 수집·텍스트 정리 |
+| 모델 파인튜닝 | <img src="portfolio/assets/skills/model-finetuning.svg" alt="PyTorch · Transformers · PEFT / LoRA" width="480"> | pko-T5-base 기반 Text2Gloss 학습 |
+| AI 대화·웹 구현 | <img src="portfolio/assets/skills/ai-web.svg" alt="Gemini API · React · JavaScript · TypeScript" width="480"> | AI 대화 연동 · 웹 게임 공동 개발 |
+| 분석·협업 | <img src="portfolio/assets/skills/analysis-collaboration.svg" alt="SQL(SQLD) · TF-IDF · Git · GitHub" width="480"> | TF-IDF 주제 비교 · Git/GitHub 변경 이력 관리 |
+| AI 개발 도구 | <img src="portfolio/assets/skills/ai-tools.svg" alt="ChatGPT · Codex · Gemini" width="480"> | 구현 보조 · 오류 재현·검사 기준 정리 |
 
 ---
 
