@@ -4,9 +4,7 @@
 
 목적에 맞게 도구를 고르고, 결과를 꼼꼼히 살피며 다듬습니다.
 
-국민대학교 AI빅데이터융합경영학과 / 데이터사이언스융합전공.
-
-[hoyhoy1227@gmail.com](mailto:hoyhoy1227@gmail.com) · [전체 포트폴리오 PDF](portfolio/Lee_Hoyoung_Portfolio.pdf) · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)  
+[전체 포트폴리오 PDF](portfolio/Lee_Hoyoung_Portfolio.pdf) · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)  
 ADsP · SQLD · OPIc AL
 
 ## 사용 기술
@@ -134,6 +132,6 @@ AI는 캐릭터의 답변을 만들고, 게임 엔진은 사건·잔액·결말�
 
 ---
 
-## 연락처와 프로젝트 기록
+## 프로젝트 기록
 
-[hoyhoy1227@gmail.com](mailto:hoyhoy1227@gmail.com) · [전체 포트폴리오 PDF](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/portfolio/Lee_Hoyoung_Portfolio.pdf) · [GitHub](https://github.com/hoyhoy1227) · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)
+[전체 포트폴리오 PDF](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/portfolio/Lee_Hoyoung_Portfolio.pdf) · [GitHub](https://github.com/hoyhoy1227) · [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)
