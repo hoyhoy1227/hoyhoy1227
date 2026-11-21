@@ -10,7 +10,7 @@ ADsP · SQLD · OPIc AL
 ## AI 서비스 테스트 사례
 
 - [사기방지위원회 · 플레이어의 이전 행동을 놓친 AI 답변](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/whatfraud-errors.md) — 추가 송금을 멈춘 뒤에도 AI가 다시 중단을 권한 대화를 검토하고, 플레이어가 마친 행동을 프롬프트에 반영했습니다.
-- [BODAM · 반 연령에 맞는 보육일지 검토](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/bodam.md) — AI가 놀이시간 검토를 빠뜨리는 문제를 찾아, 만 나이에 따라 참고할 기준과 점검 항목을 나눴습니다.
+- [BODAM 발표 PDF · 반 연령에 맞는 보육일지 검토](https://app.notion.com/p/41f1f16ffcf08108ba37d21ec7d3a67f) — AI가 놀이시간 검토를 빠뜨리는 문제를 찾아, 만 나이에 따라 참고할 기준과 점검 항목을 나눴습니다.
 
 ## 사용 기술
 
@@ -77,7 +77,7 @@ Dify에서 OpenAI의 GPT API를 연결하고, 만 나이에 따라 0~2세는 표
 
 만 2세 반 시연에서는 검토 보고서가 놀이시간은 충족했지만 일부 일지에서 바깥놀이와 실내 대체 활동의 구분이 모호하다고 짚었습니다. 보고서가 제안한 ‘실내 공 굴리기·풍선 추적’은 다음 주 월요일 Word 계획안의 실내 대안으로 반영됐습니다.
 
-[발표 시연의 입력·보고서·최종 계획안 비교](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/bodam.md)
+[기말 발표 PDF · 검토 보고서와 계획안 시연(30~33쪽)](https://app.notion.com/p/41f1f16ffcf08108ba37d21ec7d3a67f)
 
 ---
 
