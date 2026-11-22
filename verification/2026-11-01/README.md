@@ -28,7 +28,7 @@
 | 시간 초과 | `AbortError` | HTTP 504 · `provider_timeout` | 1 |
 | 할당량 초과 | provider HTTP 429 | HTTP 429 · `provider_quota` | 1 |
 
-신원 누락 사례의 최종 내장 대사는 **“내 이름이지만 그 새 계정은 내가 쓰는 게 아니야. 나한테 먼저 보여 줘서 다행이야.”**였습니다. 정상·오류 처리 전체 JSON은 [game_examples.json](results/game_examples.json)에 있습니다. API의 정책 거부와 품질 fallback은 서로 다른 관찰 결과이므로 모든 실패가 서버에서 HTTP 200으로 바뀐다고 설명하지 않습니다.
+신원 누락 사례의 최종 내장 대사는 “내 이름이지만 그 새 계정은 내가 쓰는 게 아니야. 나한테 먼저 보여 줘서 다행이야.”였습니다. 정상·오류 처리 전체 JSON은 [game_examples.json](results/game_examples.json)에 있습니다. API의 정책 거부와 품질 fallback은 서로 다른 관찰 결과이므로 모든 실패가 서버에서 HTTP 200으로 바뀐다고 설명하지 않습니다.
 
 [검사 실행 로그](results/game_checks.json)에는 상태 저장·복원, 가상 송금 중복, 늦은 응답 취소, 계약·개인정보 검사, 공유 예산의 동시 예약 등의 원본 회귀 검사 결과가 있습니다. UI 검사는 서버 렌더링 기반이며 실브라우저·모바일 실기기 QA와 다릅니다. 최초 복사에서 빠진 원본 음원 자산을 복원한 뒤 UI 검사를 다시 실행해 통과했습니다.
 
