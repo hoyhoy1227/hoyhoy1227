@@ -7,4 +7,3 @@ These badges identify tools used in the portfolio. They do not imply sponsorship
 - ChatGPT mark: unchanged white SVG from OpenAI's official repository: https://github.com/openai/sign-in-with-chatgpt-devkit/blob/main/assets/brand/chatgpt-button-white-21.svg . The ChatGPT mark belongs to OpenAI; brand guidance: https://openai.com/brand/ .
 - Tools without a supplied mark use text labels.
 - SVG badges retain accessible titles. PNG copies are used for native Notion image attachments.
-Sources: https://github.com/simple-icons/simple-icons/tree/develop/icons ; https://github.com/openai/sign-in-with-chatgpt-devkit/blob/main/assets/brand/chatgpt-button-white-21.svg ; https://openai.com/brand/
