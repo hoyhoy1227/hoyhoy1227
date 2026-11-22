@@ -1,10 +1,10 @@
-# 01 · [한국어 → 한국수어(KSL) Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
+# [한국어 → 한국수어(KSL) Gloss](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm)
 
 한국어 문장을 수어 단어의 글 표기인 Gloss로 바꾸는 모델을 개발했습니다. 어떤 문법이 쓰였는지도 문법서 근거와 함께 설명합니다.
 
 > **참여 역할** · 데이터 수집·정리 · 모델 파인튜닝  
 > X:AI 학회 팀 프로젝트
-> **활동 기간** · 2026.07 ~ 2026.08
+> **활동 기간** · 2026.07–2026.08
 
 ### 한국어와 수어는 어순이 어떻게 다를까
 
@@ -38,9 +38,9 @@
 2. **v4 개발** · 기존 번호형 모델에 NIKL 2024 자료를 더해 추가 학습했습니다. 평가를 거쳐 2024·2025 자료를 처리하는 공통 번호형 모델로 선택했습니다.
 3. **v8 개선** · 2025 문장까지 학습 범위를 넓혔습니다. 2024 학습 문장의 주석을 정리하고, 자료별 학습 비중과 학습 방식, Gloss 번호 보정을 조정해 다시 학습했습니다.
 
-NIKL 출처는 국립국어원 모두의 말뭉치 **「한국수어-한국어 병렬 말뭉치」**(2024·2025)입니다.
+학습 자료에는 국립국어원 모두의 말뭉치 [「한국수어-한국어 병렬 말뭉치」](https://kli.korean.go.kr/corpus/)(2024·2025)를 사용했습니다.
 
-[원본 모델 코드](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm) · [오류와 대응](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss-errors.md) · [공식 제공처](https://kli.korean.go.kr/corpus/)
+[원본 모델 코드](https://github.com/molba2see/adv-pj-a/tree/llm2-v4-to-v8-improvements/llm) · [오류와 대응](https://github.com/hoyhoy1227/hoyhoy1227/blob/main/projects/ksl-gloss-errors.md)
 
 <details>
 <summary>학습 설정·평가 수치·원본 근거 자세히 보기</summary>
@@ -69,7 +69,7 @@ NIKL 출처는 국립국어원 모두의 말뭉치 **「한국수어-한국어 �
 | 2024 입력 정리 | 학습 문장의 괄호 주석 제거와 제곱근 기준 코퍼스 균형 | 0.5731 | 0.5778 |
 | v8 | 3 epoch, dropout 0.1, 학습률 2e-4, 조기 종료와 최적 체크포인트 복원 | **0.5391** | **0.6162** |
 
-동일한 NIKL 일반 700문장 다중 정답 벤치마크에서 고유 입력 695개(2025 608개, 2024 85개, 재난안전 2개)를 비교했습니다. 반복 억제 디코딩은 beam 4, length penalty 1.0, repetition penalty 1.03, 3-gram 반복 차단입니다. WER는 단어 단위 편집 오류를, Token F1은 순서를 제외한 토큰 일치를 요약합니다. 이 벤치마크는 모델 개선 중 반복해서 참고했습니다. [실험 집계](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
+동일한 번호형 Gloss 평가 자료 700행에서 고유 입력 695개(2025 608개, 2024 85개, 재난안전 2개)를 비교했습니다. 반복 억제 디코딩은 beam 4, length penalty 1.0, repetition penalty 1.03, 3-gram 반복 차단입니다. WER는 단어 단위 편집 오류를, Token F1은 순서를 제외한 토큰 일치를 요약합니다. 이 벤치마크는 모델 개선 중 반복해서 참고했습니다. [실험 집계](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
 
 - **데이터 분포** · 2025 자료를 추가한 뒤 전체 F1은 올랐지만 2024 F1은 0.3181에서 0.2636으로 내려갔습니다. 2024 입력 정리와 자료 균형 조정 이후 v8에서 0.3920까지 회복했습니다. 같은 2024 부분집합의 WER는 v4 0.8389, v8 0.8447로, 지표에 따라 변화가 달랐습니다. [전처리 코드](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/data_processing/clean_nikl2024_meta.py) · [코퍼스별 결과](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_progression_v4_to_v8.json)
 - **학습 방식** · 검증 집계에서 단순 rank 증가와 DoRA보다 RSLoRA의 Token F1이 높았습니다. 최종 v8 점수는 데이터·번호 후처리·학습 설정을 함께 변경한 결과입니다. [LoRA 변형 비교](https://github.com/molba2see/adv-pj-a/blob/3c94045f6a65020dbd12d38206a499adcbe48615/llm/reports/llm2_lora_variant_experiments.json)
@@ -83,8 +83,6 @@ NIKL 출처는 국립국어원 모두의 말뭉치 **「한국수어-한국어 �
 
 </details>
 
-**출처** · 국립국어원 모두의 말뭉치 「한국수어-한국어 병렬 말뭉치」(2024·2025). [공식 제공처](https://kli.korean.go.kr/corpus/)
-
 <details>
 <summary>v4 이전 데이터 처리·기존 평가 기록</summary>
 
@@ -94,7 +92,7 @@ paust/pko-t5-base로 한국어 문장을 **한국수어 Gloss 단어열**로 바
 
 ## 데이터를 학습 자료로 만드는 과정
 
-**NIKL 출처:** [국립국어원 모두의 말뭉치](https://kli.korean.go.kr/corpus/)의 **「한국수어-한국어 병렬 말뭉치」**(2024·2025 자료)입니다. 재난안전 자료와 GKSL3k의 텍스트 주석도 처리했습니다.
+재난안전 자료와 GKSL3k의 텍스트 주석도 처리했습니다.
 
 NIKL 원문 데이터는 공개하지 않습니다. 처리 코드와 집계 결과, 직접 만든 유사 예시만 공유합니다.
 
@@ -129,7 +127,7 @@ GKSL 0.4602는 **전체 데이터셋 점수가 아닙니다**. 두 평가의 표
 - **NIKL 번호형 경로:** 혼합 test 2,557행 중 700행의 층화 부분집합입니다. **국립국어원 2024 자료 90행·2025 자료 608행·재난안전 자료 2행**으로 구성됩니다. v2·v4를 동일 집합과 repeat-safe 디코딩(beam 4, length penalty 1.0, repetition penalty 1.03, 3-gram 반복 차단)으로 비교했습니다.
 - **GKSL:** 고유 한국어 입력 142개를 한 번씩 평가하며 이 중 다중 참조 그룹은 23개입니다. 동일 입력의 참조 중 gloss 토큰 편집거리가 가장 작은 참조를 선택합니다. 동률이면 token F1, 길이 차이 순으로 결정하며, WER는 선택된 참조의 전체 토큰 수 대비 전체 편집거리 합계입니다.
 - **Token F1:** 토큰 순서를 무시한 bag-of-gloss F1의 샘플 평균으로, 어순·수어 문법 전체의 번역 정확도와 같지 않습니다.
-- **모델 경로:** 최종 NIKL v4는 2024·2025 공통 번호형 경로, GKSL v1은 번호 없는 표기 경로입니다. 기본 번역은 no-RAG이고 문법 근거는 별도 설명에 사용합니다.
+- **모델 경로:** 당시의 NIKL v4는 2024·2025 공통 번호형 경로, GKSL v1은 번호 없는 표기 경로입니다. 기본 번역은 no-RAG이고 문법 근거는 별도 설명에 사용합니다.
 - 위 수치는 보존된 집계 JSON에서 확인한 기록이며 이번 통합 검토에서 모델을 재학습·재평가한 결과는 아닙니다.
 
 ## 실제 추론 오류와 유사 입력 예시
@@ -140,9 +138,9 @@ GKSL 0.4602는 **전체 데이터셋 점수가 아닙니다**. 두 평가의 표
 | --- | --- | --- |
 | 주말에 전시를 보러 갈래요. | 초기 KE-T5에서 입력이 달라도 `지시1` 한 단어만 반복 | 빔 설정 비교와 소량 암기 진단, 새 문장 일반화를 분리해 확인. 데이터·표기·학습 구성 재검토 |
 | 동료가 없어 혼자 점심을 먹었어요. | 초기 KE-T5 진단에서 입력에 없는 `할아버지1` 생성 | 표기가 맞는지와 뜻을 담았는지를 따로 확인. 소량 암기 성공을 일반화 성능으로 제시하지 않음 |
-| 손짓의 뜻을 설명해 줄래요? | 최종 pko-T5 v4 저장 예측에 `제스처 제스처`가 남음 | 번호형 표기 이탈·짧은 반복이 남아 있으며 해결 완료로 표현하지 않음 |
+| 손짓의 뜻을 설명해 줄래요? | pko-T5 v4 저장 예측에 `제스처 제스처`가 남음 | 번호형 표기 이탈·짧은 반복이 남아 있으며 해결 완료로 표현하지 않음 |
 
-**모델 단계 구분:** 초기 KE-T5의 출력 붕괴·인물 치환과 최종 pko-T5 v4의 잔여 오류는 서로 다른 단계입니다. 최종 구성은 pko-T5 + LoRA/`lm_head`, 표기 체계별 어댑터, 기본 no-RAG이며, 여러 변경을 함께 적용했으므로 하나의 변경만으로 오류가 해결됐다고 단정하지 않습니다.
+**모델 단계 구분:** 초기 KE-T5의 출력 붕괴·인물 치환과 pko-T5 v4의 잔여 오류는 서로 다른 단계입니다. v4의 구성은 pko-T5 + LoRA/`lm_head`, 표기 체계별 어댑터, 기본 no-RAG이며, 여러 변경을 함께 적용했으므로 하나의 변경만으로 오류가 해결됐다고 단정하지 않습니다.
 
 입력 뒤 추론이 시작되지 않은 사례도 있었습니다. 초기 체크포인트의 `lm_head` 크기 `[64128, 512]`와 모델의 `[64100, 512]`가 달라 `size mismatch`로 중단됐고, 학습 시 토크나이저·확장 어휘 크기를 반영한 뒤 어댑터를 로드하도록 순서를 고쳤습니다.
 
@@ -152,7 +150,7 @@ GKSL 0.4602는 **전체 데이터셋 점수가 아닙니다**. 두 평가의 표
 
 ## 참여 역할과 근거
 
-학회 팀 프로젝트에서 **데이터 수집·정리와 모델 추가 학습에 참여**했습니다. 코드와 실험은 팀 공동 결과입니다.
+학회 팀 프로젝트에서 **데이터 수집·정리와 모델 파인튜닝에 참여**했습니다. 코드와 실험은 팀 공동 결과입니다.
 
 [팀 README](https://github.com/molba2see/adv-pj-a/blob/main/llm/README.md) · [실험 기록](https://github.com/molba2see/adv-pj-a/blob/main/llm/docs/EXPERIMENTS.md) · [결과 표](https://github.com/molba2see/adv-pj-a/tree/main/llm/reports)
 
