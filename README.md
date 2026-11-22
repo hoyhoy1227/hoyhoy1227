@@ -7,7 +7,7 @@
 [Notion](https://app.notion.com/p/4091f16ffcf08115a1a7f27daf54e656)  
 **자격·어학**  
 ADsP (2024.09) · SQLD (2025.04) · OPIc AL (2026.07)  
-AWS Certified Cloud Practitioner (CLF-C02, 2026.11)
+AWS Certified Cloud Practitioner (2026.11)
 
 ## 사용 기술
 
